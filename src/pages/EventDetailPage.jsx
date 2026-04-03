@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import { useEvent } from "../hooks/useEvents";
 import { formatFullDate, formatTime, getPrimaryPerformer, getSupportPerformers } from "../lib/format";
 import Loading, { ErrorMessage } from "../components/Loading";
@@ -6,6 +7,27 @@ import Loading, { ErrorMessage } from "../components/Loading";
 export default function EventDetailPage() {
   const { id } = useParams();
   const { data: event, loading, error } = useEvent(id);
+  const checkoutRef = useRef(null);
+
+  useEffect(() => {
+    if (!event || event.sold_out || event.canceled_at) return;
+
+    const iframeId = `od-confirm-${id}-iframe`;
+
+    if (!document.querySelector('script[src*="od_embed.js"]')) {
+      const embedScript = document.createElement("script");
+      embedScript.src = "https://app.opendate.io/packs/od_embed.js";
+      document.body.appendChild(embedScript);
+    }
+
+    const timer = setTimeout(() => {
+      if (window.ODEmbed) {
+        window.ODEmbed(iframeId);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [id, event]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error.message} />;
@@ -101,18 +123,12 @@ export default function EventDetailPage() {
             ) : event.canceled_at ? (
               <div className="ticket-canceled">Event Canceled</div>
             ) : (
-              <>
-                {event.public_ticketing_url && (
-                  <a
-                    href={event.public_ticketing_url}
-                    className="btn btn-primary btn-lg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Get Tickets
-                  </a>
-                )}
-              </>
+              <button
+                className="btn btn-primary btn-lg"
+                onClick={() => checkoutRef.current?.scrollIntoView({ behavior: "smooth" })}
+              >
+                RSVP
+              </button>
             )}
 
             {event.age_restriction && (
@@ -135,6 +151,23 @@ export default function EventDetailPage() {
           )}
         </aside>
       </div>
+
+      {/* Checkout Widget */}
+      {!event.sold_out && !event.canceled_at && (
+        <div ref={checkoutRef} className="container checkout-section">
+          <h2 className="checkout-heading">RSVP</h2>
+          <div className="checkout-embed">
+            <iframe
+              src={`https://app.opendate.io/confirms/${id}/web_orders/new`}
+              id={`od-confirm-${id}-iframe`}
+              title={event.title}
+              scrolling="no"
+              allowpaymentrequest="true"
+              style={{ border: "none", width: "1px", minWidth: "100%", height: "600px" }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -604,6 +604,27 @@ img {
   color: var(--color-accent);
 }
 
+/* ===== Checkout Widget ===== */
+.checkout-section {
+  padding: 48px 24px 80px;
+  border-top: 1px solid var(--color-border);
+}
+
+.checkout-heading {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--color-accent);
+  margin-bottom: 24px;
+}
+
+.checkout-embed {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .hero h1 {
