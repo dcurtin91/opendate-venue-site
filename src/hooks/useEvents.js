@@ -6,18 +6,18 @@ export function useEvents(options = {}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { page = 1, genre, past = false } = options;
+  const { page = 1, genre, past = false, venueId } = options;
 
   useEffect(() => {
     setLoading(true);
     setError(null);
 
     const fetcher = past ? getPastEvents : getEvents;
-    fetcher({ page, genre })
+    fetcher({ page, genre, venueId })
       .then(setData)
       .catch(setError)
       .finally(() => setLoading(false));
-  }, [page, genre, past]);
+  }, [page, genre, past, venueId]);
 
   return { data, loading, error };
 }

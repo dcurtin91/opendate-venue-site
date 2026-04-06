@@ -62,13 +62,7 @@ export default function EventDetailPage() {
             <h2>Date & Time</h2>
             <div className="event-datetime">
               <p className="event-date">{formatFullDate(event.start_time)}</p>
-              {event.door_time && (
-                <p>Doors: {formatTime(event.door_time)}</p>
-              )}
-              <p>Show: {formatTime(event.start_time)}</p>
-              {event.end_time && (
-                <p>Ends: {formatTime(event.end_time)}</p>
-              )}
+              <p>{formatTime(event.start_time)}</p>
             </div>
           </section>
 

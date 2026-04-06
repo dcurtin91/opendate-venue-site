@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { formatDate, formatTime, getMonthDay, getPrimaryPerformer } from "../lib/format";
+import { formatDate, formatTime, getMonthDay } from "../lib/format";
 
 export default function EventCard({ event }) {
   const { month, day } = getMonthDay(event.start_time);
-  const primary = getPrimaryPerformer(event);
   const supportActs = event.performers
     ?.filter((p) => p.act_type !== "primary")
     .map((p) => p.name)
@@ -41,15 +40,12 @@ export default function EventCard({ event }) {
           )}
           <div className="event-card-meta">
             <span>
-              {formatDate(event.start_time)} &middot; Doors {formatTime(event.door_time || event.start_time)}
+              {formatDate(event.start_time)} &middot; {formatTime(event.start_time)}
             </span>
             {event.venue && (
               <span className="event-card-venue">{event.venue.name}</span>
             )}
           </div>
-          {event.age_restriction && (
-            <span className="event-card-age">{event.age_restriction}</span>
-          )}
         </div>
       </div>
 

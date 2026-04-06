@@ -1,6 +1,5 @@
 const API_URL = import.meta.env.VITE_OPENDATE_API_URL;
 const SHARED_KEY = import.meta.env.VITE_OPENDATE_SHARED_KEY;
-const VENUE_ID = import.meta.env.VITE_VENUE_ID;
 
 async function fetchApi(endpoint, params = {}) {
   const url = new URL(`${API_URL}${endpoint}`);
@@ -21,12 +20,12 @@ async function fetchApi(endpoint, params = {}) {
   return response.json();
 }
 
-export async function getEvents({ page = 1, perPage = 30, genre } = {}) {
+export async function getEvents({ page = 1, perPage = 30, genre, venueId } = {}) {
   return fetchApi("/confirms", {
-    venue_id: VENUE_ID,
     page,
     per_page: perPage,
     genre,
+    venue_id: venueId,
     "q[start_time_gteq]": new Date().toISOString(),
     "q[s]": "start_time asc",
   });
@@ -36,11 +35,11 @@ export async function getEvent(id) {
   return fetchApi(`/confirms/${id}`);
 }
 
-export async function getPastEvents({ page = 1, perPage = 30 } = {}) {
+export async function getPastEvents({ page = 1, perPage = 30, venueId } = {}) {
   return fetchApi("/confirms", {
-    venue_id: VENUE_ID,
     page,
     per_page: perPage,
+    venue_id: venueId,
     "q[start_time_lt]": new Date().toISOString(),
     "q[s]": "start_time desc",
   });
