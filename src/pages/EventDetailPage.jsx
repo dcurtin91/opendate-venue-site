@@ -150,6 +150,9 @@ export default function EventDetailPage() {
       {!event.sold_out && !event.canceled_at && (
         <div ref={checkoutRef} className="container checkout-section">
           <h2 className="checkout-heading">RSVP</h2>
+          <div className="checkout-alert">
+            <strong>Note:</strong> There is a limit of one RSVP per person. You must use a valid .edu email address to register.
+          </div>
           <div className="checkout-embed">
             <iframe
               src={`https://app.opendate.io/confirms/${id}/web_orders/new`}

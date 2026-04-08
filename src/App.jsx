@@ -8,7 +8,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="app">
-        <Header />
         <main className="main">
           <Routes>
             <Route path="/" element={<EventsPage />} />
