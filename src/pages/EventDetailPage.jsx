@@ -71,13 +71,6 @@ export default function EventDetailPage() {
   return (
     <div className="event-detail">
       <div className="event-detail-hero">
-        {event.compressed_main_event_image_url && (
-          <img
-            src={event.compressed_main_event_image_url}
-            alt={event.title}
-            className="event-detail-hero-img"
-          />
-        )}
         <div className="event-detail-hero-overlay">
           <div className="container">
             <Link to="/" className="back-link">&larr; All Events</Link>
@@ -144,6 +137,13 @@ export default function EventDetailPage() {
         {/* Sidebar */}
         <aside className="event-detail-sidebar">
           <div className="ticket-card">
+            {event.compressed_main_event_image_url && (
+              <img
+                src={event.compressed_main_event_image_url}
+                alt={event.title}
+                className="ticket-card-img"
+              />
+            )}
             {event.sold_out ? (
               <div className="ticket-sold-out">Sold Out</div>
             ) : event.canceled_at ? (
