@@ -26,7 +26,39 @@ export default function EventDetailPage() {
       }
     }, 500);
 
-    return () => clearTimeout(timer);
+    // Listen for order completion from the checkout iframe
+    const params = new URLSearchParams(window.location.search);
+    const handleMessage = (msg) => {
+      if (msg.data?.from !== "WebOrderForm.jsx") return;
+
+      if (msg.data.command === "ga.purchase") {
+        const orderData = {
+          event_id: id,
+          event_title: event.title,
+          transaction_id: msg.data.data.transaction_id,
+          total: msg.data.data.value,
+          currency: msg.data.data.currency,
+          source_url: window.location.href,
+          affiliate: params.get("affiliate_link") || params.get("utm_source") || null,
+          timestamp: new Date().toISOString(),
+        };
+
+        console.log("[Affiliate Conversion]", orderData);
+
+        fetch("https://opendate.app.n8n.cloud/webhook/ef07acc5-ff0e-48f9-bdc8-a83ab0eb2db0", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderData),
+        });
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("message", handleMessage);
+    };
   }, [id, event]);
 
   if (loading) return <Loading />;
