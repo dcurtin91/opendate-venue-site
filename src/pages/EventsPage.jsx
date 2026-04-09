@@ -20,7 +20,7 @@ export default function EventsPage({ past = false }) {
       ) : (
         <section className="tour-intro">
           <div className="container">
-            <p className="tour-intro-eyebrow">Microsoft Presents</p>
+            <img src="/windows11-logo.svg" alt="Windows 11" className="tour-intro-logo" />
             <h1 className="tour-intro-heading">Windows Campus Creator Tour</h1>
             <p className="tour-intro-body">
               Most campus tours tell you what to think. We're here to show you
@@ -41,32 +41,34 @@ export default function EventsPage({ past = false }) {
         </section>
       )}
 
-      <section className="container events-section">
-        {loading && <Loading />}
-        {error && <ErrorMessage message={error.message} />}
+      <section className="events-section">
+        <div className="container">
+          {loading && <Loading />}
+          {error && <ErrorMessage message={error.message} />}
 
-        {data && data.collection && (
-          <>
-            {data.collection.length === 0 ? (
-              <div className="empty-state">
-                <p>{past ? "No past events to show." : "No upcoming events at this time. Check back soon!"}</p>
-              </div>
-            ) : (
-              <>
-                <div className="events-grid">
-                  {data.collection.map((event) => (
-                    <EventCard key={event.id} event={event} />
-                  ))}
+          {data && data.collection && (
+            <>
+              {data.collection.length === 0 ? (
+                <div className="empty-state">
+                  <p>{past ? "No past events to show." : "No upcoming events at this time. Check back soon!"}</p>
                 </div>
-                <Pagination
-                  currentPage={data.current_page}
-                  totalPages={data.total_pages}
-                  onPageChange={setPage}
-                />
-              </>
-            )}
-          </>
-        )}
+              ) : (
+                <>
+                  <div className="events-grid">
+                    {data.collection.map((event) => (
+                      <EventCard key={event.id} event={event} />
+                    ))}
+                  </div>
+                  <Pagination
+                    currentPage={data.current_page}
+                    totalPages={data.total_pages}
+                    onPageChange={setPage}
+                  />
+                </>
+              )}
+            </>
+          )}
+        </div>
       </section>
     </div>
   );

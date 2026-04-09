@@ -1,6 +1,6 @@
 /* ===== CSS Variables — Windows BTS Toolkit ===== */
 :root {
-  --color-bg: #faf9f6;
+  --color-bg: #f0f7fc;
   --color-surface: #ffffff;
   --color-surface-hover: #f0eeeb;
   --color-border: #e0ddd8;
@@ -27,10 +27,19 @@
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-bg);
+  background: #faf9f6;
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+.events-page {
+  background: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(173, 216, 255, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(190, 230, 255, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(200, 235, 255, 0.3) 0%, transparent 50%);
+  min-height: 100vh;
 }
 
 a {
@@ -65,7 +74,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(250, 249, 246, 0.92);
+  background: rgba(240, 247, 252, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -142,6 +151,13 @@ img {
   margin-bottom: 12px;
 }
 
+.tour-intro-logo {
+  height: 32px;
+  width: auto;
+  margin: 0 auto 16px;
+  display: block;
+}
+
 .tour-intro-heading {
   font-family: var(--font-serif);
   font-size: 56px;
@@ -214,7 +230,7 @@ img {
 
 /* ===== Events Grid ===== */
 .events-section {
-  padding-bottom: 80px;
+  padding: 48px 0 80px;
 }
 
 .events-grid {
@@ -679,6 +695,7 @@ img {
 
 /* ===== Footer ===== */
 .footer {
+  background: var(--color-bg);
   border-top: 1px solid var(--color-border);
   padding: 32px 0;
   text-align: center;

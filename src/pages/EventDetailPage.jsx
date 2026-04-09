@@ -125,9 +125,6 @@ export default function EventDetailPage() {
               </button>
             )}
 
-            {event.age_restriction && (
-              <p className="ticket-age">Ages: {event.age_restriction}</p>
-            )}
           </div>
 
           {/* Venue Info */}
@@ -155,7 +152,7 @@ export default function EventDetailPage() {
           </div>
           <div className="checkout-embed">
             <iframe
-              src={`https://app.opendate.io/confirms/${id}/web_orders/new`}
+              src={`https://app.opendate.io/confirms/${id}/web_orders/new?parent_url=${encodeURIComponent(window.location.href)}`}
               id={`od-confirm-${id}-iframe`}
               title={event.title}
               scrolling="no"
