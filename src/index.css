@@ -555,6 +555,11 @@ img {
   margin-top: 4px;
 }
 
+.event-no-bags {
+  font-weight: 700;
+  margin-top: 4px;
+}
+
 .event-datetime-row {
   display: flex;
   gap: 64px;

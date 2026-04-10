@@ -5,34 +5,17 @@ export default function PhotoReleasePage() {
         <h1 className="photo-release-title">Photo Release</h1>
 
         <p>
-          By entering an event or program of The Campus Agency, Inc., you are
-          entering an area where photography, audio, and video recording may
-          occur.
-        </p>
-
-        <p>
-          Your entry and presence on the event premises constitutes your consent
-          to be photographed, filmed, and/or otherwise recorded and to the
-          release, publication, exhibition, or reproduction of any and all
-          recorded media of your appearance, voice, and name for any purpose
-          whatsoever in perpetuity in connection with The Campus Agency, Inc. and
-          its initiatives, including, by way of example only, use on websites, in
-          social media, news, and advertising.
-        </p>
-
-        <p>
-          By entering the event premises, you waive and release any claims you
-          may have related to the use of recorded media of you at the event,
-          including, without limitation, any right to inspect or approve the
-          photo, video, or audio recording of you, any claims for invasion of
-          privacy, violation of the right of publicity, defamation, and copyright
-          infringement or for any fees for use of such recorded media.
-        </p>
-
-        <p>
-          You understand that all photography, filming, and/or recording will be
-          done in reliance on this consent. If you do not agree to the foregoing,
-          please do not enter the event premises.
+          By entering the Microsoft event — Windows Campus Creator Tour — you
+          acknowledge that photography, audio, and video recording may take
+          place. Your presence at the event constitutes your consent to be
+          photographed, filmed, and recorded, and to access a shared photo
+          drive. You grant permission for your likeness, voice, and name to be
+          used by The Campus Agency, Inc. and its partners for any purpose in
+          perpetuity, including use across digital, social, editorial, and
+          advertising channels. By attending, you waive any right to inspect or
+          approve the use of such materials and release any claims related to
+          their use, including but not limited to rights of privacy, publicity,
+          defamation, copyright, or compensation.
         </p>
       </div>
     </div>

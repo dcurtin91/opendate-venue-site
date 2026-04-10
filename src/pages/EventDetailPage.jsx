@@ -123,6 +123,7 @@ export default function EventDetailPage() {
                 <p className="event-date">{formatFullDate(event.start_time)}</p>
                 <p>{formatTime(event.start_time)}{event.end_time && ` - ${formatTime(event.end_time)}`}</p>
                 {event.door_time && <p className="event-doors">Lines open at {formatTime(event.door_time)}</p>}
+                <p className="event-no-bags">Strict No Bags Policy</p>
               </div>
             </div>
             <div className="expect-block">
