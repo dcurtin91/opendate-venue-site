@@ -68,6 +68,19 @@ export default function EventDetailPage() {
   const primary = getPrimaryPerformer(event);
   const support = getSupportPerformers(event);
 
+  const hasTag = (name) => event.tags?.some((t) => t.name.toLowerCase() === name);
+
+  const venueOverrides = {
+    showcase: { name: "The Showcase Room @ Culinary Drop Out", address: "129 S Farmer Ave, Tempe, AZ, 85281" },
+    ackerman: { name: "Ackerman Hall", address: "308 Westwood Plaza, Los Angeles, CA, 90024" },
+    houston: { name: "Houston Room", address: "4100 University Dr, Houston, TX, 77004" },
+    uc: { name: "The UC Theatre", address: "2036 University Avenue, Berkeley, CA, 94704" },
+    lakeside: { name: "Lakeside Village Auditorium", address: "1280 Stanford Dr, Coral Gables, FL, 33146" },
+  };
+
+  const venueInfo = Object.keys(venueOverrides).reduce((found, tag) => found || (hasTag(tag) ? venueOverrides[tag] : null), null)
+    || (event.venue ? { name: event.venue.name, address: event.venue.address_from_components } : null);
+
   return (
     <div className="event-detail">
       <div className="event-detail-hero">
@@ -82,17 +95,47 @@ export default function EventDetailPage() {
 
       <div className="container event-detail-body">
         <div className="event-detail-main">
-          {/* Date & Time */}
-          <section className="event-section">
-            <h2>Date & Time</h2>
-            <div className="event-datetime">
-              <p className="event-date">{formatFullDate(event.start_time)}</p>
-              <p>{formatTime(event.start_time)}</p>
+          {/* Date & Time + What to Expect */}
+          <section className="event-section event-datetime-row">
+            <div>
+              <h2>Date & Time</h2>
+              <div className="event-datetime">
+                <p className="event-date">{formatFullDate(event.start_time)}</p>
+                <p>{formatTime(event.start_time)}{event.end_time && ` - ${formatTime(event.end_time)}`}</p>
+                {event.door_time && <p className="event-doors">Lines open at {formatTime(event.door_time)}</p>}
+              </div>
+            </div>
+            <div className="expect-block">
+              <h3 className="expect-heading">What to expect</h3>
+              <ul className="expect-list">
+                <li>Light bites</li>
+                <li>Good conversation</li>
+              </ul>
             </div>
           </section>
 
-          {/* Performers */}
-          {event.performers && event.performers.length > 0 && (
+          {/* Get to know Your Creator — showcase events only */}
+          {event.tags?.some((t) => t.name.toLowerCase() === "showcase") && (
+            <section className="event-section creator-section">
+              <h3 className="creator-heading">Get to know Your Creator</h3>
+              <div className="creator-card">
+                {event.compressed_main_event_image_url && (
+                  <img
+                    src={event.compressed_main_event_image_url}
+                    alt={event.title}
+                    className="creator-img"
+                  />
+                )}
+                <div>
+                  <h3 className="creator-name">{primary ? primary.name : event.title}</h3>
+                  <p className="creator-bio">bio goes here</p>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Performers — non-showcase events */}
+          {!event.tags?.some((t) => t.name.toLowerCase() === "showcase") && event.performers && event.performers.length > 0 && (
             <section className="event-section">
               <h2>Lineup</h2>
               <div className="performers-list">
@@ -122,28 +165,17 @@ export default function EventDetailPage() {
             </section>
           )}
 
-          {/* Tags */}
-          {event.tags && event.tags.length > 0 && (
-            <section className="event-section">
-              <div className="event-tags">
-                {event.tags.map((tag) => (
-                  <span key={tag.id} className="tag">{tag.name}</span>
-                ))}
-              </div>
-            </section>
-          )}
+
         </div>
 
         {/* Sidebar */}
         <aside className="event-detail-sidebar">
           <div className="ticket-card">
-            {event.compressed_main_event_image_url && (
-              <img
-                src={event.compressed_main_event_image_url}
-                alt={event.title}
-                className="ticket-card-img"
-              />
-            )}
+            <img
+              src="/sidebar-hero.jpg"
+              alt="Windows Campus Creator Tour"
+              className="ticket-card-img"
+            />
             {event.sold_out ? (
               <div className="ticket-sold-out">Sold Out</div>
             ) : event.canceled_at ? (
@@ -160,16 +192,10 @@ export default function EventDetailPage() {
           </div>
 
           {/* Venue Info */}
-          {event.venue && (
+          {venueInfo && (
             <div className="venue-card">
-              <h3>{event.venue.name}</h3>
-              <p>{event.venue.address_from_components}</p>
-              {event.venue.phone && <p>{event.venue.phone}</p>}
-              {event.venue.website && (
-                <a href={event.venue.website} target="_blank" rel="noopener noreferrer">
-                  Venue Website
-                </a>
-              )}
+              <h3>{venueInfo.name}</h3>
+              <p>{venueInfo.address}</p>
             </div>
           )}
         </aside>

@@ -222,8 +222,15 @@ img {
   font-weight: 400;
   color: var(--color-accent);
   letter-spacing: -0.5px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   line-height: 1.1;
+}
+
+.tour-intro-subheading {
+  font-size: 22px;
+  color: var(--color-text-heading);
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
 }
 
 .tour-intro-body {
@@ -233,24 +240,21 @@ img {
   margin-bottom: 32px;
 }
 
-.tour-intro-cta {
+.tour-intro-cta-btn {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  color: var(--color-accent);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 24px 32px;
+  cursor: pointer;
   display: inline-block;
+  transition: border-color 0.2s;
 }
 
-.tour-intro-cta-label {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  color: var(--color-accent);
-  margin-bottom: 6px;
-}
-
-.tour-intro-cta-sub {
-  font-size: 18px;
-  color: var(--color-text-heading);
+.tour-intro-cta-btn:hover {
+  border-color: var(--color-accent);
 }
 
 /* ===== Events Filters ===== */
@@ -428,6 +432,10 @@ img {
   gap: 2px;
 }
 
+.event-card-doors {
+  color: var(--color-text-muted);
+}
+
 .event-card-venue {
   font-weight: 500;
 }
@@ -467,43 +475,40 @@ img {
   min-height: 360px;
   display: flex;
   align-items: flex-end;
-  background: var(--color-bg);
-  background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(173, 216, 255, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 30%, rgba(190, 230, 255, 0.35) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 80%, rgba(200, 235, 255, 0.3) 0%, transparent 50%);
+  background: url("/hero-bg.jpg") center center / cover no-repeat;
 }
 
 .event-detail-hero-overlay {
   position: relative;
   width: 100%;
   padding: 48px 0 32px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
 }
 
 .event-detail-hero-overlay h1 {
   font-family: var(--font-serif);
   font-size: 44px;
   font-weight: 400;
-  color: var(--color-text-heading);
+  color: #ffffff;
   letter-spacing: -0.5px;
   margin-bottom: 8px;
 }
 
 .event-presenter {
   font-size: 16px;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .back-link {
   display: inline-block;
   font-size: 14px;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 16px;
   transition: color 0.2s;
 }
 
 .back-link:hover {
-  color: var(--color-text);
+  color: #ffffff;
 }
 
 /* ===== Event Detail Body ===== */
@@ -538,10 +543,75 @@ img {
   color: var(--color-text-heading);
 }
 
+.event-doors {
+  margin-top: 4px;
+}
+
+.event-datetime-row {
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+
+.expect-block {
+  padding-top: 36px;
+}
+
+.expect-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-bottom: 16px;
+}
+
+.expect-list {
+  list-style: disc;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--color-text);
+}
+
 .event-tags {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+/* ===== Creator Section ===== */
+.creator-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-bottom: 16px;
+}
+
+.creator-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.creator-img {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.creator-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-heading);
+  margin-bottom: 4px;
+}
+
+.creator-bio {
+  font-size: 14px;
+  color: var(--color-text-muted);
 }
 
 /* ===== Performers ===== */
@@ -655,12 +725,12 @@ img {
 }
 
 .btn-primary {
-  background: var(--color-accent);
-  color: #fff;
+  background: #f5b401;
+  color: #1a1a1a;
 }
 
 .btn-primary:hover {
-  background: var(--color-accent-hover);
+  background: #e5a800;
 }
 
 .btn-lg {
@@ -812,8 +882,9 @@ img {
     font-size: 36px;
   }
 
-  .tour-intro-cta {
-    padding: 20px 24px;
+  .tour-intro-cta-btn {
+    padding: 12px 28px;
+    font-size: 16px;
   }
 
   .events-grid {
@@ -827,5 +898,10 @@ img {
 
   .event-detail-hero-overlay h1 {
     font-size: 30px;
+  }
+
+  .event-datetime-row {
+    flex-direction: column;
+    gap: 32px;
   }
 }

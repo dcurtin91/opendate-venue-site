@@ -22,26 +22,28 @@ export default function EventsPage({ past = false }) {
           <div className="container">
             <img src="/windows11-logo.svg" alt="Windows 11" className="tour-intro-logo" />
             <h1 className="tour-intro-heading">Windows Campus Creator Tour</h1>
+            <p className="tour-intro-subheading">Don't just watch creators, become one.</p>
             <p className="tour-intro-body">
-              Most campus tours tell you what to think. We're here to show you
-              how to build. Windows Campus Creator Tour is a 5-city campus
-              takeover designed to bridge the gap between your degree and your
-              digital future. Each stop features a heavyweight creator in a
-              fireside-style conversation. No PR-polished scripts here, just
-              transparent insights into the breakthroughs, the failures, and the
-              real-world hustle of the creator economy.
+              Windows Campus Creator Tour is a 5-city campus takeover designed
+              to bridge the gap between your degree and your digital future.
+              Each stop features a heavyweight creator in a fireside-style
+              conversation. No PR-polished scripts here, just transparent
+              insights into the breakthroughs, the failures, and the real-world
+              hustle of the creator economy. Join the Windows Campus Creator
+              Tour for live conversations, hands-on creation, and content made
+              in real time.
             </p>
-            <div className="tour-intro-cta">
-              <p className="tour-intro-cta-label">Catch the Tour</p>
-              <p className="tour-intro-cta-sub">
-                5 Stops. Unlimited Potential. Is your campus on the list?
-              </p>
-            </div>
+            <button
+              className="tour-intro-cta-btn"
+              onClick={() => document.getElementById('events').scrollIntoView({ behavior: 'smooth' })}
+            >
+              Join the Tour
+            </button>
           </div>
         </section>
       )}
 
-      <section className="events-section">
+      <section id="events" className="events-section">
         <div className="container">
           {loading && <Loading />}
           {error && <ErrorMessage message={error.message} />}
