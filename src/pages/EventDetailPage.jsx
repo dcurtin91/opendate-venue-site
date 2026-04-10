@@ -1,8 +1,28 @@
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useEvent } from "../hooks/useEvents";
 import { formatFullDate, formatTime, getPrimaryPerformer, getSupportPerformers } from "../lib/format";
 import Loading, { ErrorMessage } from "../components/Loading";
+
+function CreatorBio({ name }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const fullText = `${name} is a Canadian creator, entrepreneur, actor, and media executive redefining what modern influence looks like. With a social audience of over 42 million, he first rose to prominence on TikTok and has since leveraged his platform into a multifaceted career spanning entertainment, business, and venture. ${name} is the co-founder of CrossCheck Studios, a Gen Z-focused media company built in partnership with Unrealistic Ideas, as well as Animal Capital, a venture fund investing in next-generation consumer and technology startups. He also played a key role in building one of the most successful creator-led podcasts, BFFs, helping shape the intersection of internet culture and mainstream media. Expanding into Hollywood, ${name} starred in A24's Dream Scenario alongside Nicolas Cage and led the viral sketch comedy series Read the Room, which generated over 60 million views in its first month. His work has earned recognition from Forbes 30 Under 30, Forbes Top Creators, Rolling Stone, Variety, and Business Insider. Known for his entrepreneurial drive and cultural impact, ${name} continues to bridge digital influence with traditional media, building brands and businesses that resonate with the next generation.`;
+
+  const preview = fullText.slice(0, 150);
+
+  return (
+    <div>
+      <h3 className="creator-name">{name}</h3>
+      <div className="creator-bio">
+        <p>{expanded ? fullText : `${preview}...`}</p>
+        <button className="read-more-btn" onClick={() => setExpanded(!expanded)}>
+          {expanded ? "Show less" : "Read more"}
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function EventDetailPage() {
   const { id } = useParams();
@@ -108,8 +128,11 @@ export default function EventDetailPage() {
             <div className="expect-block">
               <h3 className="expect-heading">What to expect</h3>
               <ul className="expect-list">
-                <li>Light bites</li>
-                <li>Good conversation</li>
+                <li>Meet top creators</li>
+                <li>Create content live</li>
+                <li>Play + compete</li>
+                <li>Participate in a live conversation with creators</li>
+                <li>Enjoy light bites and refreshments</li>
               </ul>
             </div>
           </section>
@@ -126,10 +149,7 @@ export default function EventDetailPage() {
                     className="creator-img"
                   />
                 )}
-                <div>
-                  <h3 className="creator-name">{primary ? primary.name : event.title}</h3>
-                  <p className="creator-bio">bio goes here</p>
-                </div>
+                <CreatorBio name={primary ? primary.name : event.title} />
               </div>
             </section>
           )}

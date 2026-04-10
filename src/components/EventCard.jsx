@@ -20,6 +20,7 @@ export default function EventCard({ event }) {
     event.tags?.some((t) => t.name.toLowerCase() === tag)
   );
   const venueName = venueTag ? VENUE_OVERRIDES[venueTag].name : event.venue?.name;
+  const isShowcase = event.tags?.some((t) => t.name.toLowerCase() === "showcase");
 
   return (
     <Link to={`/events/${event.id}`} className="event-card">
@@ -36,6 +37,7 @@ export default function EventCard({ event }) {
             <span className="event-card-image-day">{day}</span>
           </div>
         )}
+        {!isShowcase && <span className="coming-soon-overlay">COMING SOON</span>}
         {event.sold_out && <span className="event-card-badge sold-out">Sold Out</span>}
         {event.canceled_at && <span className="event-card-badge canceled">Canceled</span>}
       </div>
