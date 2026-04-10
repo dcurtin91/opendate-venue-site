@@ -123,7 +123,8 @@ export default function EventDetailPage() {
                 <p className="event-date">{formatFullDate(event.start_time)}</p>
                 <p>{formatTime(event.start_time)}{event.end_time && ` - ${formatTime(event.end_time)}`}</p>
                 {event.door_time && <p className="event-doors">Lines open at {formatTime(event.door_time)}</p>}
-                <p className="event-no-bags">Strict No Bags Policy</p>
+                {venueInfo && <p>{venueInfo.name}</p>}
+                {venueInfo && <p>{venueInfo.address}</p>}
               </div>
             </div>
             <div className="expect-block">
@@ -193,7 +194,7 @@ export default function EventDetailPage() {
         <aside className="event-detail-sidebar">
           <div className="ticket-card">
             <img
-              src="/sidebar-hero.jpg"
+              src="/image.png"
               alt="Windows Campus Creator Tour"
               className="ticket-card-img"
             />
@@ -227,7 +228,7 @@ export default function EventDetailPage() {
         <div ref={checkoutRef} className="container checkout-section">
           <h2 className="checkout-heading">RSVP</h2>
           <div className="checkout-alert">
-            <strong>Note:</strong> There is a limit of one RSVP per person. You must use a valid .edu email address to register.
+            <strong>Note:</strong> There is a limit of one RSVP per person. You must use a valid <strong>.edu</strong> email address to register. <strong>Strict No Bags Policy.</strong>
           </div>
           <div className="checkout-embed">
             <iframe

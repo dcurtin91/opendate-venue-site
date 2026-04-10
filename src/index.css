@@ -551,6 +551,18 @@ img {
   color: var(--color-text-heading);
 }
 
+.event-venue-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-bottom: 4px;
+}
+
+.event-venue-address {
+  font-size: 16px;
+  color: var(--color-text-muted);
+}
+
 .event-doors {
   margin-top: 4px;
 }
