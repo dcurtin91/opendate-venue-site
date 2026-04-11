@@ -194,7 +194,7 @@ export default function EventDetailPage() {
         <aside className="event-detail-sidebar">
           <div className="ticket-card">
             <img
-              src="/image.png"
+              src="/image (1).png"
               alt="Windows Campus Creator Tour"
               className="ticket-card-img"
             />
