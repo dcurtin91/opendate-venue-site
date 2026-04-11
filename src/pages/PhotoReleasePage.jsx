@@ -10,12 +10,12 @@ export default function PhotoReleasePage() {
           place. Your presence at the event constitutes your consent to be
           photographed, filmed, and recorded, and to access a shared photo
           drive. You grant permission for your likeness, voice, and name to be
-          used by The Campus Agency, Inc. and its partners for any purpose in
-          perpetuity, including use across digital, social, editorial, and
-          advertising channels. By attending, you waive any right to inspect or
-          approve the use of such materials and release any claims related to
-          their use, including but not limited to rights of privacy, publicity,
-          defamation, copyright, or compensation.
+          used by Team One, Microsoft, and The Campus Agency. and its partners
+          for any purpose in perpetuity, including use across digital, social,
+          editorial, and advertising channels. By attending, you waive any
+          right to inspect or approve the use of such materials and release any
+          claims related to their use, including but not limited to rights of
+          privacy, publicity, defamation, copyright, or compensation.
         </p>
       </div>
     </div>
