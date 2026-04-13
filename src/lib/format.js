@@ -25,14 +25,25 @@ export function formatDate(dateString) {
   });
 }
 
-export function formatTime(dateString) {
+const TZ_ABBR = {
+  "America/Los_Angeles": "PT",
+  "America/Phoenix": "MT",
+  "America/Denver": "MT",
+  "America/Boise": "MT",
+  "America/Chicago": "CT",
+  "America/New_York": "ET",
+};
+
+export function formatTime(dateString, ianaZone) {
   const date = new Date(dateString);
   const tz = getVenueTimeZone(dateString);
-  return date.toLocaleTimeString("en-US", {
+  const time = date.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
     ...(tz && { timeZone: tz }),
   });
+  const abbr = ianaZone ? (TZ_ABBR[ianaZone] || "") : "";
+  return abbr ? `${time} ${abbr}` : time;
 }
 
 export function formatFullDate(dateString) {

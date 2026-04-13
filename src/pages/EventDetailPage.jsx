@@ -4,10 +4,10 @@ import { useEvent } from "../hooks/useEvents";
 import { formatFullDate, formatTime, getPrimaryPerformer, getSupportPerformers } from "../lib/format";
 import Loading, { ErrorMessage } from "../components/Loading";
 
-function CreatorBio({ name }) {
+function CreatorBio({ name, bioText }) {
   const [expanded, setExpanded] = useState(false);
 
-  const fullText = `${name} is a Canadian creator, entrepreneur, actor, and media executive redefining what modern influence looks like. With a social audience of over 42 million, he first rose to prominence on TikTok and has since leveraged his platform into a multifaceted career spanning entertainment, business, and venture. ${name} is the co-founder of CrossCheck Studios, a Gen Z-focused media company built in partnership with Unrealistic Ideas, as well as Animal Capital, a venture fund investing in next-generation consumer and technology startups. He also played a key role in building one of the most successful creator-led podcasts, BFFs, helping shape the intersection of internet culture and mainstream media. Expanding into Hollywood, ${name} starred in A24's Dream Scenario alongside Nicolas Cage and led the viral sketch comedy series Read the Room, which generated over 60 million views in its first month. His work has earned recognition from Forbes 30 Under 30, Forbes Top Creators, Rolling Stone, Variety, and Business Insider. Known for his entrepreneurial drive and cultural impact, ${name} continues to bridge digital influence with traditional media, building brands and businesses that resonate with the next generation.`;
+  const fullText = bioText || `${name} is a Canadian creator, entrepreneur, actor, and media executive redefining what modern influence looks like. With a social audience of over 42 million, he first rose to prominence on TikTok and has since leveraged his platform into a multifaceted career spanning entertainment, business, and venture. ${name} is the co-founder of CrossCheck Studios, a Gen Z-focused media company built in partnership with Unrealistic Ideas, as well as Animal Capital, a venture fund investing in next-generation consumer and technology startups. He also played a key role in building one of the most successful creator-led podcasts, BFFs, helping shape the intersection of internet culture and mainstream media. Expanding into Hollywood, ${name} starred in A24's Dream Scenario alongside Nicolas Cage and led the viral sketch comedy series Read the Room, which generated over 60 million views in its first month. His work has earned recognition from Forbes 30 Under 30, Forbes Top Creators, Rolling Stone, Variety, and Business Insider. Known for his entrepreneurial drive and cultural impact, ${name} continues to bridge digital influence with traditional media, building brands and businesses that resonate with the next generation.`;
 
   const preview = fullText.slice(0, 150);
 
@@ -23,6 +23,8 @@ function CreatorBio({ name }) {
     </div>
   );
 }
+
+const CREATOR_2_BIO = `Creator 2 is a leading social media and television personality and the founder and host of the hit podcast PlanBri Uncut. With a rare ability to connect with mass audiences across multiple demographics, she has built one of the most loyal followings in the media universe through her candor, sharp humor, and unfiltered perspective.\n\nIn 2025, Creator 2 appeared as a competitor on Season 4 of FOX's Special Forces: World's Toughest Test, where she spoke candidly about resilience, boundaries, and reclaiming her voice, finishing the competition as a runner-up. From 2020 to 2025, she also cohosted the juggernaut podcast BFFs alongside Josh Richards.\n\nOver the past year, Creator 2 has further distinguished herself by choosing transparency over silence, using her platform to advocate for honesty, empowerment, and the courage for women to share their stories and speak their truths.\n\nAn East Coast native, Creator 2 lives in New York City with her dog and two cats.`;
 
 export default function EventDetailPage() {
   const { id } = useParams();
@@ -91,11 +93,11 @@ export default function EventDetailPage() {
   const hasTag = (name) => event.tags?.some((t) => t.name.toLowerCase() === name);
 
   const venueOverrides = {
-    showcase: { name: "The Showcase Room @ Culinary Drop Out", address: "129 S Farmer Ave, Tempe, AZ, 85281" },
-    ackerman: { name: "Ackerman Hall", address: "308 Westwood Plaza, Los Angeles, CA, 90024" },
-    houston: { name: "Houston Room", address: "4100 University Dr, Houston, TX, 77004" },
-    uc: { name: "The UC Theatre", address: "2036 University Avenue, Berkeley, CA, 94704" },
-    lakeside: { name: "Lakeside Village Auditorium", address: "1280 Stanford Dr, Coral Gables, FL, 33146" },
+    showcase: { name: "The Showcase Room @ Culinary Drop Out", address: "129 S Farmer Ave, Tempe, AZ, 85281", tz: "America/Phoenix" },
+    ackerman: { name: "Ackerman Hall", address: "308 Westwood Plaza, Los Angeles, CA, 90024", tz: "America/Los_Angeles" },
+    houston: { name: "Houston Room", address: "4100 University Dr, Houston, TX, 77004", tz: "America/Chicago" },
+    uc: { name: "The UC Theatre", address: "2036 University Avenue, Berkeley, CA, 94704", tz: "America/Los_Angeles" },
+    lakeside: { name: "Lakeside Village Auditorium", address: "1280 Stanford Dr, Coral Gables, FL, 33146", tz: "America/New_York" },
   };
 
   const venueInfo = Object.keys(venueOverrides).reduce((found, tag) => found || (hasTag(tag) ? venueOverrides[tag] : null), null)
@@ -121,8 +123,8 @@ export default function EventDetailPage() {
               <h2>Date & Time</h2>
               <div className="event-datetime">
                 <p className="event-date">{formatFullDate(event.start_time)}</p>
-                <p>{formatTime(event.start_time)}{event.end_time && ` - ${formatTime(event.end_time)}`}</p>
-                {event.door_time && <p className="event-doors">Lines open at {formatTime(event.door_time)}</p>}
+                <p>{formatTime(event.start_time, venueInfo?.tz)}{event.end_time && ` - ${formatTime(event.end_time, venueInfo?.tz)}`}</p>
+                {event.door_time && <p className="event-doors">Lines open at {formatTime(event.door_time, venueInfo?.tz)}</p>}
                 {venueInfo && <p>{venueInfo.name}</p>}
                 {venueInfo && <p>{venueInfo.address}</p>}
               </div>
@@ -153,6 +155,11 @@ export default function EventDetailPage() {
                 )}
                 <CreatorBio name={primary ? primary.name : event.title} />
               </div>
+              {id === "688024" && (
+                <div className="creator-card" style={{ marginLeft: 88, marginTop: 24 }}>
+                  <CreatorBio name="Creator 2" bioText={CREATOR_2_BIO} />
+                </div>
+              )}
             </section>
           )}
 
@@ -228,7 +235,7 @@ export default function EventDetailPage() {
         <div ref={checkoutRef} className="container checkout-section">
           <h2 className="checkout-heading">RSVP</h2>
           <div className="checkout-alert">
-            <strong>Note:</strong> There is a limit of one RSVP per person. You must use a valid <strong>.edu</strong> email address to register. <strong>Strict No Bags Policy.</strong>
+            <strong>Note:</strong> There is a limit of one RSVP per person. You must use a valid <strong>.edu</strong> email address to register. <strong>Strict No Bags Policy.</strong> Limited Venue Capacity: Entry is first-come, first-served.
           </div>
           <div className="checkout-embed">
             <iframe

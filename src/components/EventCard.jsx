@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { formatDate, formatTime, getMonthDay } from "../lib/format";
 
 const VENUE_OVERRIDES = {
-  showcase: { name: "The Showcase Room @ Culinary Drop Out", address: "129 S Farmer Ave, Tempe, AZ, 85281" },
-  ackerman: { name: "Ackerman Hall", address: "308 Westwood Plaza, Los Angeles, CA, 90024" },
-  houston: { name: "Houston Room", address: "4100 University Dr, Houston, TX, 77004" },
-  uc: { name: "The UC Theatre", address: "2036 University Avenue, Berkeley, CA, 94704" },
-  lakeside: { name: "Lakeside Village Auditorium", address: "1280 Stanford Dr, Coral Gables, FL, 33146" },
+  showcase: { name: "The Showcase Room @ Culinary Drop Out", cityState: "Tempe, AZ", tz: "America/Phoenix" },
+  ackerman: { name: "Ackerman Hall", cityState: "Los Angeles, CA", tz: "America/Los_Angeles" },
+  houston: { name: "Houston Room", cityState: "Houston, TX", tz: "America/Chicago" },
+  uc: { name: "The UC Theatre", cityState: "Berkeley, CA", tz: "America/Los_Angeles" },
+  lakeside: { name: "Lakeside Village Auditorium", cityState: "Coral Gables, FL", tz: "America/New_York" },
 };
 
 export default function EventCard({ event }) {
@@ -19,7 +19,9 @@ export default function EventCard({ event }) {
   const venueTag = Object.keys(VENUE_OVERRIDES).find((tag) =>
     event.tags?.some((t) => t.name.toLowerCase() === tag)
   );
-  const venueName = venueTag ? VENUE_OVERRIDES[venueTag].name : event.venue?.name;
+  const venueData = venueTag ? VENUE_OVERRIDES[venueTag] : null;
+  const venueName = venueData ? venueData.name : event.venue?.name;
+  const venueTz = venueData?.tz;
   const isShowcase = event.tags?.some((t) => t.name.toLowerCase() === "showcase");
 
   return (
@@ -55,11 +57,14 @@ export default function EventCard({ event }) {
           )}
           <div className="event-card-meta">
             <span>
-              {formatDate(event.start_time)} &middot; {formatTime(event.start_time)}
-              {event.end_time && ` - ${formatTime(event.end_time)}`}
+              {formatDate(event.start_time)} &middot; {formatTime(event.start_time, venueTz)}
+              {event.end_time && ` - ${formatTime(event.end_time, venueTz)}`}
             </span>
             {venueName && (
               <span className="event-card-venue">{venueName}</span>
+            )}
+            {venueData?.cityState && (
+              <span className="event-card-city">{venueData.cityState}</span>
             )}
           </div>
         </div>
