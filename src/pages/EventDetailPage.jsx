@@ -156,7 +156,12 @@ export default function EventDetailPage() {
                 <CreatorBio name={primary ? primary.name : event.title} />
               </div>
               {id === "688024" && (
-                <div className="creator-card" style={{ marginLeft: 88, marginTop: 24 }}>
+                <div className="creator-card" style={{ marginTop: 24 }}>
+                  <img
+                    src="/Bri Headshot.jpeg"
+                    alt="Creator 2"
+                    className="creator-img"
+                  />
                   <CreatorBio name="Creator 2" bioText={CREATOR_2_BIO} />
                 </div>
               )}
