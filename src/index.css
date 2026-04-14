@@ -190,7 +190,7 @@ img {
 .tour-intro {
   padding: 72px 0 56px;
   text-align: center;
-  background: url("/1.jpg") center center / cover no-repeat;
+  background: url("/1 (1).png") center center / cover no-repeat;
 }
 
 .tour-intro .container {
@@ -486,7 +486,7 @@ img {
   min-height: 360px;
   display: flex;
   align-items: flex-end;
-  background: url("/1.jpg") center center / cover no-repeat;
+  background: url("/1 (1).png") center center / cover no-repeat;
 }
 
 .event-detail-hero-overlay {
