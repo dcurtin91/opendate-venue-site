@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useEvent } from "../hooks/useEvents";
 import { formatFullDate, formatTime, getPrimaryPerformer, getSupportPerformers } from "../lib/format";
 import Loading, { ErrorMessage } from "../components/Loading";
+import PromoBanner from "../components/PromoBanner";
 
 function CreatorBio({ name, bioText }) {
   const [expanded, setExpanded] = useState(false);
@@ -105,6 +106,7 @@ export default function EventDetailPage() {
 
   return (
     <div className="event-detail">
+      <PromoBanner />
       <div className="event-detail-hero">
         <div className="event-detail-hero-overlay">
           <div className="container">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEvents } from "../hooks/useEvents";
 import EventCard from "../components/EventCard";
 import Pagination from "../components/Pagination";
+import PromoBanner from "../components/PromoBanner";
 import Loading, { ErrorMessage } from "../components/Loading";
 
 export default function EventsPage({ past = false }) {
@@ -10,6 +11,7 @@ export default function EventsPage({ past = false }) {
 
   return (
     <div className="events-page">
+      {!past && <PromoBanner />}
       {past ? (
         <section className="hero">
           <div className="container">
