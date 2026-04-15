@@ -498,15 +498,28 @@ img {
   position: relative;
   min-height: 360px;
   display: flex;
-  align-items: flex-end;
+  align-items: stretch;
   background: url("/1 (1).png") center center / cover no-repeat;
 }
 
 .event-detail-hero-overlay {
   position: relative;
   width: 100%;
-  padding: 48px 0 32px;
+  padding: 24px 0 48px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+}
+
+.event-detail-hero-content {
+  text-align: center;
+  padding-top: 32px;
+}
+
+.event-detail-hero-logo {
+  height: 32px;
+  width: auto;
+  margin: 0 auto 16px;
+  display: block;
+  filter: brightness(0) invert(1);
 }
 
 .event-detail-hero-overlay h1 {
@@ -516,6 +529,11 @@ img {
   color: #ffffff;
   letter-spacing: -0.5px;
   margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.event-detail-hero-content .event-presenter {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .event-presenter {

@@ -5,18 +5,22 @@ import { formatFullDate, formatTime, getPrimaryPerformer, getSupportPerformers }
 import Loading, { ErrorMessage } from "../components/Loading";
 import PromoBanner from "../components/PromoBanner";
 
+const CREATOR_1_BIO = `Josh Richards is a Canadian creator, entrepreneur, actor, and media executive redefining what modern influence looks like. With a social audience of over 42 million, he first rose to prominence on TikTok and has since leveraged his platform into a multifaceted career spanning entertainment, business, and venture.\n\nJosh is the co-founder of CrossCheck Studios, a Gen Z-focused media company, as well as Animal Capital, a venture fund investing in next-generation consumer and technology startups. He also played a key role in building one of the most successful creator-led podcasts, BFFs, helping shape the intersection of internet culture and mainstream media.\n\nExpanding into Hollywood, Josh starred in A24's Dream Scenario alongside Nicolas Cage and led the viral sketch comedy series Read the Room, which generated over 60 million views in its first month. His work has earned recognition from Forbes 30 Under 30, Forbes Top Creators, Rolling Stone, Variety, and Business Insider.\n\nKnown for his entrepreneurial drive and cultural impact, Josh continues to bridge digital influence with traditional media, building brands and businesses that resonate with the next generation.`;
+
 function CreatorBio({ name, bioText }) {
   const [expanded, setExpanded] = useState(false);
 
-  const fullText = bioText || `Josh Richards is a Canadian creator, entrepreneur, actor, and media executive redefining what modern influence looks like. With a social audience of over 42 million, he first rose to prominence on TikTok and has since leveraged his platform into a multifaceted career spanning entertainment, business, and venture. Josh is the co-founder of CrossCheck Studios, a Gen Z-focused media company built in partnership with Unrealistic Ideas, as well as Animal Capital, a venture fund investing in next-generation consumer and technology startups. He also played a key role in building one of the most successful creator-led podcasts, BFFs, helping shape the intersection of internet culture and mainstream media. Expanding into Hollywood, Josh starred in A24's Dream Scenario alongside Nicolas Cage and led the viral sketch comedy series Read the Room, which generated over 60 million views in its first month. His work has earned recognition from Forbes 30 Under 30, Forbes Top Creators, Rolling Stone, Variety, and Business Insider. Known for his entrepreneurial drive and cultural impact, Josh continues to bridge digital influence with traditional media, building brands and businesses that resonate with the next generation.`;
-
-  const preview = fullText.slice(0, 150);
+  const fullText = bioText || CREATOR_1_BIO;
+  const paragraphs = fullText.split("\n\n");
+  const preview = paragraphs[0].slice(0, 150);
 
   return (
     <div>
       <h3 className="creator-name">{name}</h3>
       <div className="creator-bio">
-        <p>{expanded ? fullText : `${preview}...`}</p>
+        {expanded
+          ? paragraphs.map((p, i) => <p key={i}>{p}</p>)
+          : <p>{preview}...</p>}
         <button className="read-more-btn" onClick={() => setExpanded(!expanded)}>
           {expanded ? "Show less" : "Read more"}
         </button>
@@ -111,8 +115,15 @@ export default function EventDetailPage() {
         <div className="event-detail-hero-overlay">
           <div className="container">
             <Link to="/" className="back-link">&larr; All Events</Link>
-            <h1>{event.title}</h1>
-            {event.presenter && <p className="event-presenter">Presented by {event.presenter}</p>}
+            <div className="event-detail-hero-content">
+              <img
+                src="/windows11-logo.svg"
+                alt="Windows 11"
+                className="event-detail-hero-logo"
+              />
+              <h1>{event.title}</h1>
+              {event.presenter && <p className="event-presenter">Presented by {event.presenter}</p>}
+            </div>
           </div>
         </div>
       </div>
