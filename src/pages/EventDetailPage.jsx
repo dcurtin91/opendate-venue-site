@@ -29,6 +29,8 @@ function CreatorBio({ name, bioText }) {
   );
 }
 
+const CREATOR_3_BIO = `Olandria Carthen is an American media personality, model, and rising fashion tastemaker who first captured national attention as a fan-favorite in the franchise on Love Island USA Season 7. An Alabama native, she was affectionately dubbed the "Bama Barbie" as she captured hearts by being unapologetically herself. Her magnetic presence has kept those same viewers and millions of new fans hooked far beyond the show's finale, setting media abuzz wherever she is seen. Aside from being coined the breakout star, she has since rapidly become TV's biggest breakout star of the year and fashion's newest "it-girl". Her engagement and influence are astounding - commanding headlines on most major media and shaping conversations for her style and cultural influence. She's being recognized as a fashion tastemaker by most of the mainstream media daily, being featured in CR Fashion Book, Vanity Fair, Vogue, and InStyle, to name a few.\n\nBorn to young parents and as a first-generation to high school and Tuskegee University graduate, Olandria's purpose is to use her influence with intention and utilize platform to empower others to celebrate representation and amplify underrecognized voices in fashion, education, and beyond. Whether on-screen, on the runway, at HBCUs across the US, or at the center of cultural conversation online, she continues to drive impactful conversations with purpose and prove that brains and beauty can coexist beautifully.`;
+
 const CREATOR_2_BIO = `Brianna LaPaglia is a leading social media and television personality and the founder and host of the hit podcast PlanBri Uncut. With a rare ability to connect with mass audiences across multiple demographics, she has built one of the most loyal followings in the media universe through her candor, sharp humor, and unfiltered perspective.\n\nIn 2025, Brianna appeared as a competitor on Season 4 of FOX's Special Forces: World's Toughest Test, where she spoke candidly about resilience, boundaries, and reclaiming her voice, finishing the competition as a runner-up. From 2020 to 2025, she also cohosted the juggernaut podcast BFFs alongside Josh Richards.\n\nOver the past year, Brianna has further distinguished herself by choosing transparency over silence, using her platform to advocate for honesty, empowerment, and the courage for women to share their stories and speak their truths.\n\nAn East Coast native, Brianna lives in New York City with her dog and two cats.`;
 
 export default function EventDetailPage() {
@@ -154,8 +156,8 @@ export default function EventDetailPage() {
             </div>
           </section>
 
-          {/* Get to know Your Creator — showcase events only */}
-          {event.tags?.some((t) => t.name.toLowerCase() === "showcase") && (
+          {/* Get to know Your Creator — showcase events */}
+          {hasTag("showcase") && (
             <section className="event-section creator-section">
               <h3 className="creator-heading">Get to Know Your Creator & Host</h3>
               <div className="creator-card">
@@ -181,8 +183,23 @@ export default function EventDetailPage() {
             </section>
           )}
 
+          {/* Get to know Your Creator — houston events */}
+          {hasTag("houston") && (
+            <section className="event-section creator-section">
+              <h3 className="creator-heading">Get to Know Your Creator & Host</h3>
+              <div className="creator-card">
+                <img
+                  src="/MmOEEEqR.jpeg"
+                  alt="Olandria Carthen"
+                  className="creator-img"
+                />
+                <CreatorBio name="Olandria Carthen" bioText={CREATOR_3_BIO} />
+              </div>
+            </section>
+          )}
+
           {/* Performers — non-showcase events */}
-          {!event.tags?.some((t) => t.name.toLowerCase() === "showcase") && event.performers && event.performers.length > 0 && (
+          {!hasTag("showcase") && !hasTag("houston") && event.performers && event.performers.length > 0 && (
             <section className="event-section">
               <h2>Lineup</h2>
               <div className="performers-list">

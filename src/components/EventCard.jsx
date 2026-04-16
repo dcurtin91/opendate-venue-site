@@ -39,7 +39,7 @@ export default function EventCard({ event }) {
             <span className="event-card-image-day">{day}</span>
           </div>
         )}
-        {!isShowcase && <span className="coming-soon-overlay">COMING SOON</span>}
+        {!isShowcase && venueTag !== "houston" && <span className="coming-soon-overlay">COMING SOON</span>}
         {event.sold_out && <span className="event-card-badge sold-out">Sold Out</span>}
         {event.canceled_at && <span className="event-card-badge canceled">Canceled</span>}
       </div>
