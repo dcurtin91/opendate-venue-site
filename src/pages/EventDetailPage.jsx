@@ -103,7 +103,7 @@ export default function EventDetailPage() {
 
   const venueOverrides = {
     showcase: { name: "The Showcase Room @ Culinary Drop Out", address: "129 S Farmer Ave, Tempe, AZ, 85281", tz: "America/Phoenix" },
-    ackerman: { name: "Ackerman Hall", address: "308 Westwood Plaza, Los Angeles, CA, 90024", tz: "America/Los_Angeles" },
+    royce: { name: "Royce Hall", address: "10745 Dickson Ct, Los Angeles, CA, 90095", tz: "America/Los_Angeles" },
     houston: { name: "Houston Room", address: "4100 University Dr, Houston, TX, 77004", tz: "America/Chicago" },
     uc: { name: "The UC Theatre", address: "2036 University Avenue, Berkeley, CA, 94704", tz: "America/Los_Angeles" },
     lakeside: { name: "Lakeside Village Auditorium", address: "1280 Stanford Dr, Coral Gables, FL, 33146", tz: "America/New_York" },

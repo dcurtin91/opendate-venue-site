@@ -3,7 +3,7 @@ import { formatDate, formatTime, getMonthDay } from "../lib/format";
 
 const VENUE_OVERRIDES = {
   showcase: { name: "The Showcase Room @ Culinary Drop Out", cityState: "Tempe, AZ", tz: "America/Phoenix" },
-  ackerman: { name: "Ackerman Hall", cityState: "Los Angeles, CA", tz: "America/Los_Angeles" },
+  royce: { name: "Royce Hall", cityState: "Los Angeles, CA", tz: "America/Los_Angeles" },
   houston: { name: "Houston Room", cityState: "Houston, TX", tz: "America/Chicago" },
   uc: { name: "The UC Theatre", cityState: "Berkeley, CA", tz: "America/Los_Angeles" },
   lakeside: { name: "Lakeside Village Auditorium", cityState: "Coral Gables, FL", tz: "America/New_York" },
