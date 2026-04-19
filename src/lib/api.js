@@ -26,7 +26,6 @@ export async function getEvents({ page = 1, perPage = 30, genre, venueId } = {})
     per_page: perPage,
     genre,
     venue_id: venueId,
-    "q[start_time_gteq]": new Date().toISOString(),
     "q[s]": "start_time asc",
   });
 }
