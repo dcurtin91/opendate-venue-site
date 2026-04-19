@@ -148,9 +148,10 @@ export default function EventDetailPage() {
   const waitlistRef = useRef(null);
 
   const isSoldOut = event ? (event.sold_out || SOLD_OUT_OVERRIDES.has(id)) : false;
+  const showWaitlist = event ? (event.sold_out && !SOLD_OUT_OVERRIDES.has(id)) : false;
 
   useEffect(() => {
-    if (!event || isSoldOut || event.canceled_at) return;
+    if (!event || showWaitlist || event.canceled_at) return;
 
     const iframeId = `od-confirm-${id}-iframe`;
 
@@ -362,12 +363,14 @@ export default function EventDetailPage() {
             {isSoldOut ? (
               <>
                 <div className="ticket-sold-out">Sold Out</div>
-                <button
-                  className="btn btn-primary btn-lg"
-                  onClick={() => waitlistRef.current?.scrollIntoView({ behavior: "smooth" })}
-                >
-                  Join Waitlist
-                </button>
+                {showWaitlist && (
+                  <button
+                    className="btn btn-primary btn-lg"
+                    onClick={() => waitlistRef.current?.scrollIntoView({ behavior: "smooth" })}
+                  >
+                    Join Waitlist
+                  </button>
+                )}
               </>
             ) : event.canceled_at ? (
               <div className="ticket-canceled">Event Canceled</div>
@@ -393,7 +396,7 @@ export default function EventDetailPage() {
       </div>
 
       {/* Waitlist */}
-      {isSoldOut && (
+      {showWaitlist && (
         <div ref={waitlistRef} className="container checkout-section">
           <h2 className="checkout-heading">Join the Waitlist</h2>
           <div className="checkout-alert">
@@ -404,7 +407,7 @@ export default function EventDetailPage() {
       )}
 
       {/* Checkout Widget */}
-      {!isSoldOut && !event.canceled_at && (
+      {!showWaitlist && !event.canceled_at && (
         <div ref={checkoutRef} className="container checkout-section">
           <h2 className="checkout-heading">RSVP</h2>
           <div className="checkout-alert">
