@@ -9,6 +9,8 @@ const CREATOR_1_BIO = `Josh Richards is a Canadian creator, entrepreneur, actor,
 
 const WAITLIST_WEBHOOK_URL = "https://opendate.app.n8n.cloud/webhook/f2cdf2a9-b383-4ec9-96db-31d80da7b5c0";
 
+const SOLD_OUT_OVERRIDES = new Set(["688023"]);
+
 function WaitlistForm({ eventId, eventTitle }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -145,8 +147,10 @@ export default function EventDetailPage() {
   const checkoutRef = useRef(null);
   const waitlistRef = useRef(null);
 
+  const isSoldOut = event ? (event.sold_out || SOLD_OUT_OVERRIDES.has(id)) : false;
+
   useEffect(() => {
-    if (!event || event.sold_out || event.canceled_at) return;
+    if (!event || isSoldOut || event.canceled_at) return;
 
     const iframeId = `od-confirm-${id}-iframe`;
 
@@ -355,7 +359,7 @@ export default function EventDetailPage() {
               alt="Windows Campus Creator Tour"
               className="ticket-card-img"
             />
-            {event.sold_out ? (
+            {isSoldOut ? (
               <>
                 <div className="ticket-sold-out">Sold Out</div>
                 <button
@@ -389,7 +393,7 @@ export default function EventDetailPage() {
       </div>
 
       {/* Waitlist */}
-      {event.sold_out && (
+      {isSoldOut && (
         <div ref={waitlistRef} className="container checkout-section">
           <h2 className="checkout-heading">Join the Waitlist</h2>
           <div className="checkout-alert">
@@ -400,7 +404,7 @@ export default function EventDetailPage() {
       )}
 
       {/* Checkout Widget */}
-      {!event.sold_out && !event.canceled_at && (
+      {!isSoldOut && !event.canceled_at && (
         <div ref={checkoutRef} className="container checkout-section">
           <h2 className="checkout-heading">RSVP</h2>
           <div className="checkout-alert">

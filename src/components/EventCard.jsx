@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { formatDate, formatTime, getMonthDay } from "../lib/format";
 
+const SOLD_OUT_OVERRIDES = new Set(["688023"]);
+
 const VENUE_OVERRIDES = {
   showcase: { name: "The Showcase Room @ Culinary Drop Out", cityState: "Tempe, AZ", tz: "America/Phoenix" },
   royce: { name: "Royce Hall", cityState: "Los Angeles, CA", tz: "America/Los_Angeles" },
@@ -40,7 +42,7 @@ export default function EventCard({ event }) {
           </div>
         )}
         {!isShowcase && venueTag !== "houston" && <span className="coming-soon-overlay">COMING SOON</span>}
-        {event.sold_out && <span className="event-card-badge sold-out">Sold Out</span>}
+        {(event.sold_out || SOLD_OUT_OVERRIDES.has(String(event.id))) && <span className="event-card-badge sold-out">Sold Out</span>}
         {event.canceled_at && <span className="event-card-badge canceled">Canceled</span>}
       </div>
 
