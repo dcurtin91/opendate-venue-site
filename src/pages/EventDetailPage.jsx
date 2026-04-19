@@ -7,6 +7,110 @@ import PromoBanner from "../components/PromoBanner";
 
 const CREATOR_1_BIO = `Josh Richards is a Canadian creator, entrepreneur, actor, and media executive redefining what modern influence looks like. With a social audience of over 42 million, he first rose to prominence on TikTok and has since leveraged his platform into a multifaceted career spanning entertainment, business, and venture.\n\nJosh is the co-founder of CrossCheck Studios, a Gen Z-focused media company, as well as Animal Capital, a venture fund investing in next-generation consumer and technology startups. He also played a key role in building one of the most successful creator-led podcasts, BFFs, helping shape the intersection of internet culture and mainstream media.\n\nExpanding into Hollywood, Josh starred in A24's Dream Scenario alongside Nicolas Cage and led the viral sketch comedy series Read the Room, which generated over 60 million views in its first month. His work has earned recognition from Forbes 30 Under 30, Forbes Top Creators, Rolling Stone, Variety, and Business Insider.\n\nKnown for his entrepreneurial drive and cultural impact, Josh continues to bridge digital influence with traditional media, building brands and businesses that resonate with the next generation.`;
 
+const WAITLIST_WEBHOOK_URL = "https://opendate.app.n8n.cloud/webhook/f2cdf2a9-b383-4ec9-96db-31d80da7b5c0";
+
+function WaitlistForm({ eventId, eventTitle }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const isEduEmail = (val) => /^[^\s@]+@[^\s@]+\.edu$/i.test(val.trim());
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+
+    if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+      setErrorMsg("Please fill in all fields.");
+      return;
+    }
+    if (!isEduEmail(email)) {
+      setErrorMsg("Please use a valid .edu email address.");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const res = await fetch(WAITLIST_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event_id: eventId,
+          event_title: eventTitle,
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          email: email.trim(),
+          source_url: window.location.href,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+      setStatus("success");
+    } catch (err) {
+      console.error("[Waitlist submission]", err);
+      setStatus("error");
+      setErrorMsg("Something went wrong. Please try again.");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="waitlist-success">
+        <h3>You're on the list!</h3>
+        <p>We'll email you at {email} if a spot opens up.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form className="waitlist-form" onSubmit={handleSubmit} noValidate>
+      <div className="waitlist-row">
+        <label className="waitlist-field">
+          <span>First name</span>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            autoComplete="given-name"
+          />
+        </label>
+        <label className="waitlist-field">
+          <span>Last name</span>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            autoComplete="family-name"
+          />
+        </label>
+      </div>
+      <label className="waitlist-field">
+        <span>Email (.edu required)</span>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          autoComplete="email"
+          placeholder="you@school.edu"
+        />
+      </label>
+      {errorMsg && <p className="waitlist-error">{errorMsg}</p>}
+      <button
+        type="submit"
+        className="btn btn-primary btn-lg"
+        disabled={status === "submitting"}
+      >
+        {status === "submitting" ? "Submitting..." : "Join Waitlist"}
+      </button>
+    </form>
+  );
+}
+
 function CreatorBio({ name, bioText }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -39,6 +143,7 @@ export default function EventDetailPage() {
   const { id } = useParams();
   const { data: event, loading, error } = useEvent(id);
   const checkoutRef = useRef(null);
+  const waitlistRef = useRef(null);
 
   useEffect(() => {
     if (!event || event.sold_out || event.canceled_at) return;
@@ -251,7 +356,15 @@ export default function EventDetailPage() {
               className="ticket-card-img"
             />
             {event.sold_out ? (
-              <div className="ticket-sold-out">Sold Out</div>
+              <>
+                <div className="ticket-sold-out">Sold Out</div>
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={() => waitlistRef.current?.scrollIntoView({ behavior: "smooth" })}
+                >
+                  Join Waitlist
+                </button>
+              </>
             ) : event.canceled_at ? (
               <div className="ticket-canceled">Event Canceled</div>
             ) : (
@@ -274,6 +387,17 @@ export default function EventDetailPage() {
           )}
         </aside>
       </div>
+
+      {/* Waitlist */}
+      {event.sold_out && (
+        <div ref={waitlistRef} className="container checkout-section">
+          <h2 className="checkout-heading">Join the Waitlist</h2>
+          <div className="checkout-alert">
+            <strong>This event is sold out.</strong> Add yourself to the waitlist and we'll email you if a spot opens up. You must use a valid <strong>.edu</strong> email address.
+          </div>
+          <WaitlistForm eventId={id} eventTitle={event.title} />
+        </div>
+      )}
 
       {/* Checkout Widget */}
       {!event.sold_out && !event.canceled_at && (

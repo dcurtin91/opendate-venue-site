@@ -965,6 +965,78 @@ img {
   border-top: 1px solid var(--color-border);
 }
 
+.waitlist-form {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.waitlist-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.waitlist-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.waitlist-field input {
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 400;
+  color: var(--color-text);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.waitlist-field input:focus {
+  border-color: var(--color-accent);
+}
+
+.waitlist-error {
+  color: #b71c1c;
+  font-size: 14px;
+  margin: 0;
+}
+
+.waitlist-success {
+  max-width: 520px;
+  padding: 24px;
+  background: #e8f5e9;
+  border: 1px solid #2e7d32;
+  border-radius: var(--radius);
+}
+
+.waitlist-success h3 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: #1b5e20;
+}
+
+.waitlist-success p {
+  color: #1b5e20;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .waitlist-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .checkout-heading {
   font-family: var(--font-serif);
   font-size: 32px;
