@@ -25,9 +25,10 @@ export default function EventCard({ event }) {
   const venueName = venueData ? venueData.name : event.venue?.name;
   const venueTz = venueData?.tz;
   const isShowcase = event.tags?.some((t) => t.name.toLowerCase() === "showcase");
+  const isPast = event.start_time && new Date(event.start_time) < new Date();
 
   return (
-    <Link to={`/events/${event.id}`} className="event-card">
+    <Link to={`/events/${event.id}`} className={`event-card${isPast ? " is-past" : ""}`}>
       <div className="event-card-image">
         {event.compressed_main_event_image_url ? (
           <img
@@ -41,8 +42,9 @@ export default function EventCard({ event }) {
             <span className="event-card-image-day">{day}</span>
           </div>
         )}
-        {!isShowcase && venueTag !== "houston" && <span className="coming-soon-overlay">COMING SOON</span>}
-        {(event.sold_out || SOLD_OUT_OVERRIDES.has(String(event.id))) && <span className="event-card-badge sold-out">Sold Out</span>}
+        {!isPast && !isShowcase && venueTag !== "houston" && <span className="coming-soon-overlay">COMING SOON</span>}
+        {isPast && <span className="event-card-badge past">Past Event</span>}
+        {!isPast && (event.sold_out || SOLD_OUT_OVERRIDES.has(String(event.id))) && <span className="event-card-badge sold-out">Sold Out</span>}
         {event.canceled_at && <span className="event-card-badge canceled">Canceled</span>}
       </div>
 

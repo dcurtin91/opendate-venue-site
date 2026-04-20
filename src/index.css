@@ -395,6 +395,23 @@ img {
   color: #fff;
 }
 
+.event-card-badge.past {
+  background: rgba(26, 26, 26, 0.75);
+  color: #fff;
+}
+
+.event-card.is-past .event-card-image img {
+  filter: grayscale(30%) brightness(0.85);
+}
+
+.event-card.is-past .event-card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
 .event-card-content {
   display: flex;
   gap: 16px;
