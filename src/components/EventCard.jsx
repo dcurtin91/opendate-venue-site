@@ -8,7 +8,7 @@ const VENUE_OVERRIDES = {
   royce: { name: "Royce Hall", cityState: "Los Angeles, CA", tz: "America/Los_Angeles" },
   houston: { name: "Houston Room", cityState: "Houston, TX", tz: "America/Chicago" },
   uc: { name: "The UC Theatre", cityState: "Berkeley, CA", tz: "America/Los_Angeles" },
-  lakeside: { name: "Lakeside Village Auditorium", cityState: "Coral Gables, FL", tz: "America/New_York" },
+  lakeside: { name: "Watsco Center", cityState: "Coral Gables, FL", tz: "America/New_York" },
 };
 
 export default function EventCard({ event }) {

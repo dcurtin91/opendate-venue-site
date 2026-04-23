@@ -216,7 +216,7 @@ export default function EventDetailPage() {
     royce: { name: "Royce Hall", address: "10745 Dickson Ct, Los Angeles, CA, 90095", tz: "America/Los_Angeles" },
     houston: { name: "Houston Room", address: "4100 University Dr, Houston, TX, 77004", tz: "America/Chicago" },
     uc: { name: "The UC Theatre", address: "2036 University Avenue, Berkeley, CA, 94704", tz: "America/Los_Angeles" },
-    lakeside: { name: "Lakeside Village Auditorium", address: "1280 Stanford Dr, Coral Gables, FL, 33146", tz: "America/New_York" },
+    lakeside: { name: "Watsco Center", address: "1245 Dauer Drive, Coral Gables, FL, 33146", tz: "America/New_York" },
   };
 
   const venueInfo = Object.keys(venueOverrides).reduce((found, tag) => found || (hasTag(tag) ? venueOverrides[tag] : null), null)
