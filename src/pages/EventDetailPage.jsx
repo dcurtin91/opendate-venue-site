@@ -390,6 +390,11 @@ export default function EventDetailPage() {
             <div className="venue-card">
               <h3>{venueInfo.name}</h3>
               <p>{venueInfo.address}</p>
+              {hasTag("lakeside") && (
+                <p className="venue-disclaimer">
+                  This program, while located at the University of Miami, is neither the responsibility of, nor endorsed by, the University of Miami.
+                </p>
+              )}
             </div>
           )}
         </aside>
