@@ -42,7 +42,7 @@ export default function EventCard({ event }) {
             <span className="event-card-image-day">{day}</span>
           </div>
         )}
-        {!isPast && !isShowcase && venueTag !== "houston" && <span className="coming-soon-overlay">COMING SOON</span>}
+        {!isPast && !isShowcase && venueTag !== "houston" && venueTag !== "lakeside" && <span className="coming-soon-overlay">COMING SOON</span>}
         {isPast && <span className="event-card-badge past">Past Event</span>}
         {!isPast && (event.sold_out || SOLD_OUT_OVERRIDES.has(String(event.id))) && <span className="event-card-badge sold-out">Sold Out</span>}
         {event.canceled_at && <span className="event-card-badge canceled">Canceled</span>}
