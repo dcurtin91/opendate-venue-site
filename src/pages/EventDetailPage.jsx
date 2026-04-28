@@ -135,6 +135,10 @@ function CreatorBio({ name, bioText }) {
   );
 }
 
+const CREATOR_7_BIO = `ar non-athlete to sign to Jordan Brand. He has a proven track record of driving immediate results and virality.`;
+
+const CREATOR_8_BIO = `Xandra Pohl is one of the most exciting rising stars in both the creator and music scene today. In 2023, she was wrapping up her final year at the University of Miami when she decided to share her DJing talent on TikTok. What happened next was nothing short of extraordinary—her raw talent, electrifying energy, and unfiltered personality instantly resonated with Gen Z audiences, propelling her into the spotlight.\n\nAt just 24 years old, Xandra's journey has been nothing short of meteoric. In 2023 alone, she made waves performing at iconic events like the F1 Miami Grand Prix, opening for Kygo at the Pegasus World Cup, and sharing stages with music legends like Calvin Harris and The Chainsmokers at the Palm Tree Festival and 4th of July celebrations. In 2024, she was named a Sports Illustrated Rookie, released her first song, and became a part of Forbes 30 Under 30.\n\nBeyond music, Xandra's vibrant online presence and massive social following have caught the eye of top global brands. She's partnered with Celsius, Victoria Secret, YSL Beauty, Coach, L'Oréal Paris, and Bumble, blending her personal style with her love for all things fashion and beauty. Xandra's passion, talent, and authenticity continue to inspire and captivate audiences, making her a true force in the entertainment world.`;
+
 const CREATOR_6_BIO = `Brandon Edelman (aka 'Bran Flakezz'): Bran is a 29-year-old comedy and lifestyle content creator, podcast host, and entertainment personality from Philadelphia. He started on TikTok with a mission to bring smiles and help people forget about the stresses of daily life. His relatable, unfiltered, and witty commentary has gained him a devoted cross-platform audience of over one million followers. As Bran's career has evolved, so has his content. Today, he's recognized for his humorous recaps, as well as his thought-provoking 'TikTok Transparency' series, where he dives into influencer marketing and the creator economy. In 2025, he was invited to speak on a Cannes Lions panel, where he shared insights on authenticity, audience trust, and the evolving creator economy — and was later named to Forbes' 30 Under 30, solidifying his influence in digital media.`;
 
 const CREATOR_5_BIO = `Alix Earle is a leading global social media personality and the creator and host of the hit Hot Mess vlog-style podcast. Her rapid rise can be credited to the way she brings her devoted followers along for a ride of unexpected reality and candid humor, paired with authentic beauty, fashion, and lifestyle content.\n\nAcclaimed for her unmatched online engagement—often referred to by media and brands as the "Alix Earle [Sold Out] Effect"—Earle has a rare ability to connect with mass audiences across multiple demographics. TIME Magazine confirming the phenomenon, stating "The 'Alix Earle Effect' is real." In 2025, Earle was named a Titan on TIME's 100 inaugural Creator List, cementing her status as one of the most influential digital creators of her generation.\n\nEarle's impact as a leading creator has been recognized by leading publications including Forbes, Variety, The Hollywood Reporter and Rolling Stone, among others. In May 2025, she graced the cover of WSJ Magazine, celebrated as "Gen-Z's savviest pitch woman." Earle is next set to hit the ballroom as part of the upcoming season of ABC's hit competition reality series, Dancing with the Stars.\n\nMost recently, Earle founded and launched Reale Actives, a dermatologist-developed, acne-focused skincare brand she built from the ground up over two years. Rooted in her own public journey with cystic acne, the line was developed alongside her dermatologist, Dr. Kiran Mian, and debuted in March 2026 with four products designed to simplify routines for sensitive, acne-prone skin.\n\nA true businesswoman, Earle goes well beyond the typical influencer role blending investment, creative direction, and authentic brand building. What began as a genuine love for pre-biotic soda brand poppi, evolved into a strategic equity partnership where she's led standout campaigns, including starring in her very first Super Bowl LIX commercial and a personalized limited-edition can. In March 2025, she became the largest individual investor in sparkling margarita brand SipMARGS, taking on a hands-on creative role and helping shape the brand's marketing with her signature style.\n\nA proud University of Miami graduate with a degree in marketing, Earle established a namesake scholarship at the university's Patti and Allan Herbert Business School. The Alix Earle Scholarship provides significant support for business students, advancing the school's commitment to diversity and inclusion.\n\nDriven by a personal passion for giving back, Earle founded Serving in Heels (formerly Meals in Heels), a recurring event series that unites friends to prepare and package meals for Miami's underserved communities. Supported by the Caesar-Iglesias Family Foundation and in partnership with Major Food Group's kitchens, the initiative has delivered thousands of meals to local shelters. With growing support from partners like Carbone Fine Food, Serving in Heels has blossomed into a movement championing generosity, connection, and lasting impact.`;
@@ -345,8 +349,38 @@ export default function EventDetailPage() {
             </section>
           )}
 
+          {/* Get to know Your Creator — uc events */}
+          {hasTag("uc") && (
+            <section className="event-section creator-section">
+              <h3 className="creator-heading">Get to Know Your Creator & Host</h3>
+              <div className="creator-card">
+                <div className="creator-img creator-img-placeholder" aria-hidden="true" />
+                <div>
+                  <h3 className="creator-name">Duke Dennis</h3>
+                  <p className="creator-bio creator-bio-placeholder">Headshot and bio coming soon.</p>
+                </div>
+              </div>
+              <div className="creator-card" style={{ marginTop: 24 }}>
+                <img
+                  src="/Agent00-Approved_Photo.jpg"
+                  alt="Agent 00"
+                  className="creator-img"
+                />
+                <CreatorBio name="Agent 00" bioText={CREATOR_7_BIO} />
+              </div>
+              <div className="creator-card" style={{ marginTop: 24 }}>
+                <img
+                  src="/Xandra%20HEADSHOT.jpeg"
+                  alt="Xandra Pohl"
+                  className="creator-img"
+                />
+                <CreatorBio name="Xandra Pohl" bioText={CREATOR_8_BIO} />
+              </div>
+            </section>
+          )}
+
           {/* Performers — non-showcase events */}
-          {!hasTag("showcase") && !hasTag("houston") && !hasTag("lakeside") && event.performers && event.performers.length > 0 && (
+          {!hasTag("showcase") && !hasTag("houston") && !hasTag("lakeside") && !hasTag("uc") && event.performers && event.performers.length > 0 && (
             <section className="event-section">
               <h2>Lineup</h2>
               <div className="performers-list">

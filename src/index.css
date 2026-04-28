@@ -680,6 +680,16 @@ img {
   object-fit: cover;
 }
 
+.creator-img-placeholder {
+  background: var(--color-surface-hover);
+  flex-shrink: 0;
+}
+
+.creator-bio-placeholder {
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
 .creator-name {
   font-size: 16px;
   font-weight: 600;
