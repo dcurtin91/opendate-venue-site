@@ -697,6 +697,16 @@ img {
   margin-bottom: 4px;
 }
 
+.creator-role {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent);
+  margin-bottom: 4px;
+}
+
 .creator-bio {
   font-size: 14px;
   color: var(--color-text);

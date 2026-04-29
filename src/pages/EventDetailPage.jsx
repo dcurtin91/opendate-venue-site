@@ -113,7 +113,7 @@ function WaitlistForm({ eventId, eventTitle }) {
   );
 }
 
-function CreatorBio({ name, bioText }) {
+function CreatorBio({ name, bioText, role }) {
   const [expanded, setExpanded] = useState(false);
 
   const fullText = bioText || CREATOR_1_BIO;
@@ -122,6 +122,7 @@ function CreatorBio({ name, bioText }) {
 
   return (
     <div>
+      {role && <span className="creator-role">{role}</span>}
       <h3 className="creator-name">{name}</h3>
       <div className="creator-bio">
         {expanded
@@ -135,7 +136,9 @@ function CreatorBio({ name, bioText }) {
   );
 }
 
-const CREATOR_7_BIO = `ar non-athlete to sign to Jordan Brand. He has a proven track record of driving immediate results and virality.`;
+const CREATOR_7_BIO = `Agent00 is a co-founder of AMP and their men's care line, Tone. He is one of the most versatile creators in the space. Ranked #11 best streamer of 2024 by Complex, Agent has built a global audience through gaming, IRL travel streams across three continents, automotive content, including building a drift car live on stream. He's mastered content and has grown multiple YouTube channels beyond 1 million subscribers. He's partnered with the NFL, NBA, Popeyes, and became the first ever non-athlete to sign to Jordan Brand. He has a proven track record of driving immediate results and virality.`;
+
+const CREATOR_DUKE_BIO = `Duke Dennis is a content creator and co-founder of AMP (Any Means Possible) and AMP's personal care brand, Tone. With over 20 million followers across all platforms and ranked the #5 most influential creator of 2024 by Rolling Stone, Duke's reach goes well beyond gaming. He has been featured in a Fortnite trailer, covered by GQ, and is the first ever non-athlete to be signed by Jordan Brand. Duke built his brand on authenticity, style, and a rare ability to move culture across every demographic.`;
 
 const CREATOR_8_BIO = `Xandra Pohl is one of the most exciting rising stars in both the creator and music scene today. In 2023, she was wrapping up her final year at the University of Miami when she decided to share her DJing talent on TikTok. What happened next was nothing short of extraordinary—her raw talent, electrifying energy, and unfiltered personality instantly resonated with Gen Z audiences, propelling her into the spotlight.\n\nAt just 24 years old, Xandra's journey has been nothing short of meteoric. In 2023 alone, she made waves performing at iconic events like the F1 Miami Grand Prix, opening for Kygo at the Pegasus World Cup, and sharing stages with music legends like Calvin Harris and The Chainsmokers at the Palm Tree Festival and 4th of July celebrations. In 2024, she was named a Sports Illustrated Rookie, released her first song, and became a part of Forbes 30 Under 30.\n\nBeyond music, Xandra's vibrant online presence and massive social following have caught the eye of top global brands. She's partnered with Celsius, Victoria Secret, YSL Beauty, Coach, L'Oréal Paris, and Bumble, blending her personal style with her love for all things fashion and beauty. Xandra's passion, talent, and authenticity continue to inspire and captivate audiences, making her a true force in the entertainment world.`;
 
@@ -271,6 +274,7 @@ export default function EventDetailPage() {
                 <li>Create content live</li>
                 <li>Play + compete</li>
                 <li>Participate in a live conversation with creators</li>
+                {hasTag("uc") && <li>Live DJ performance</li>}
                 <li>Enjoy light bites and refreshments</li>
               </ul>
             </div>
@@ -352,13 +356,14 @@ export default function EventDetailPage() {
           {/* Get to know Your Creator — uc events */}
           {hasTag("uc") && (
             <section className="event-section creator-section">
-              <h3 className="creator-heading">Get to Know Your Creator & Host</h3>
+              <h3 className="creator-heading">Get to Know Your Creators & DJ</h3>
               <div className="creator-card">
-                <div className="creator-img creator-img-placeholder" aria-hidden="true" />
-                <div>
-                  <h3 className="creator-name">Duke Dennis</h3>
-                  <p className="creator-bio creator-bio-placeholder">Headshot and bio coming soon.</p>
-                </div>
+                <img
+                  src="/duke%20dennis.jpg"
+                  alt="Duke Dennis"
+                  className="creator-img"
+                />
+                <CreatorBio name="Duke Dennis" bioText={CREATOR_DUKE_BIO} role="Creator" />
               </div>
               <div className="creator-card" style={{ marginTop: 24 }}>
                 <img
@@ -366,7 +371,7 @@ export default function EventDetailPage() {
                   alt="Agent 00"
                   className="creator-img"
                 />
-                <CreatorBio name="Agent 00" bioText={CREATOR_7_BIO} />
+                <CreatorBio name="Agent 00" bioText={CREATOR_7_BIO} role="Creator" />
               </div>
               <div className="creator-card" style={{ marginTop: 24 }}>
                 <img
@@ -374,7 +379,7 @@ export default function EventDetailPage() {
                   alt="Xandra Pohl"
                   className="creator-img"
                 />
-                <CreatorBio name="Xandra Pohl" bioText={CREATOR_8_BIO} />
+                <CreatorBio name="Xandra Pohl" bioText={CREATOR_8_BIO} role="DJ" />
               </div>
             </section>
           )}
