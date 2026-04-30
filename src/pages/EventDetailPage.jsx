@@ -247,7 +247,9 @@ export default function EventDetailPage() {
                 className="event-detail-hero-logo"
               />
               <h1>{event.title}</h1>
-              {event.presenter && <p className="event-presenter">Presented by {event.presenter}</p>}
+              {hasTag("uc")
+                ? <p className="event-presenter">With a Free Performance by DJ Xandra</p>
+                : event.presenter && <p className="event-presenter">Presented by {event.presenter}</p>}
             </div>
           </div>
         </div>

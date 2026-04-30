@@ -26,6 +26,9 @@ export default function EventCard({ event }) {
   const venueTz = venueData?.tz;
   const isShowcase = event.tags?.some((t) => t.name.toLowerCase() === "showcase");
   const isPast = event.start_time && new Date(event.start_time) < new Date();
+  const presenterLine = venueTag === "uc"
+    ? "With a Free Performance by DJ Xandra"
+    : event.presenter ? `Presented by ${event.presenter}` : null;
 
   return (
     <Link to={`/events/${event.id}`} className={`event-card${isPast ? " is-past" : ""}`}>
@@ -56,6 +59,9 @@ export default function EventCard({ event }) {
 
         <div className="event-card-info">
           <h3 className="event-card-title">{event.title}</h3>
+          {presenterLine && (
+            <p className="event-card-presenter">{presenterLine}</p>
+          )}
           {supportActs && (
             <p className="event-card-support">with {supportActs}</p>
           )}
