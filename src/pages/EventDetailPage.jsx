@@ -252,9 +252,11 @@ export default function EventDetailPage() {
                 alt="Windows 11"
                 className="event-detail-hero-logo"
               />
-              <h1>{event.title}</h1>
+              <h1>{hasTag("royce") ? "Performance by Two Friends at UCLA" : event.title}</h1>
               {hasTag("uc")
                 ? <p className="event-presenter">With a Free Performance by DJ Xandra</p>
+                : hasTag("royce")
+                ? <p className="event-presenter">With creators Josh Richards and Gabi Moura</p>
                 : event.presenter && <p className="event-presenter">Presented by {event.presenter}</p>}
             </div>
           </div>
@@ -417,7 +419,7 @@ export default function EventDetailPage() {
               </div>
               <div className="creator-card" style={{ marginTop: 24 }}>
                 <img
-                  src="/josh-richards.png"
+                  src="/Josh_05.06.2026.jpeg"
                   alt="Josh Richards"
                   className="creator-img"
                 />

@@ -28,6 +28,7 @@ export default function EventCard({ event }) {
   const isPast = event.start_time && new Date(event.start_time) < new Date();
   const presenterLine = venueTag === "uc"
     ? "With a Free Performance by DJ Xandra"
+    : venueTag === "royce" ? "With creators Josh Richards and Gabi Moura"
     : event.presenter ? `Presented by ${event.presenter}` : null;
 
   return (
@@ -58,7 +59,9 @@ export default function EventCard({ event }) {
         </div>
 
         <div className="event-card-info">
-          <h3 className="event-card-title">{event.title}</h3>
+          <h3 className="event-card-title">
+            {venueTag === "royce" ? "Performance by Two Friends at UCLA" : event.title}
+          </h3>
           {presenterLine && (
             <p className="event-card-presenter">{presenterLine}</p>
           )}
