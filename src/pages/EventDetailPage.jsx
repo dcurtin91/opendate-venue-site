@@ -280,9 +280,10 @@ export default function EventDetailPage() {
               <ul className="expect-list">
                 {hasTag("royce") ? (
                   <>
+                    <li>Enjoy a live performance by Two Friends</li>
                     <li>Grab a photo with Josh & Gabi</li>
                     <li>Create live content with QTCinderella</li>
-                    <li>Enjoy a live performance by Two Friends</li>
+                    <li>Enjoy light bites and refreshments</li>
                   </>
                 ) : (
                   <>
@@ -405,8 +406,16 @@ export default function EventDetailPage() {
           {/* Get to know Your Creator — royce events */}
           {hasTag("royce") && (
             <section className="event-section creator-section">
-              <h3 className="creator-heading">Get to Know Your Creators, Streamer & DJ</h3>
+              <h3 className="creator-heading">Get to Know Your DJ, Creators & Streamer</h3>
               <div className="creator-card">
+                <img
+                  src="/two_frieds.jpg"
+                  alt="Two Friends"
+                  className="creator-img"
+                />
+                <CreatorBio name="Two Friends" bioText={CREATOR_TWO_FRIENDS_BIO} role="DJ" />
+              </div>
+              <div className="creator-card" style={{ marginTop: 24 }}>
                 <img
                   src="/josh-richards.png"
                   alt="Josh Richards"
@@ -429,14 +438,6 @@ export default function EventDetailPage() {
                   className="creator-img"
                 />
                 <CreatorBio name="QTCinderella" bioText={CREATOR_QT_BIO} role="Streamer" />
-              </div>
-              <div className="creator-card" style={{ marginTop: 24 }}>
-                <img
-                  src="/two_frieds.jpg"
-                  alt="Two Friends"
-                  className="creator-img"
-                />
-                <CreatorBio name="Two Friends" bioText={CREATOR_TWO_FRIENDS_BIO} role="DJ" />
               </div>
             </section>
           )}
