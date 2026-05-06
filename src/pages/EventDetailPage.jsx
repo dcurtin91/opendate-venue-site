@@ -138,6 +138,12 @@ function CreatorBio({ name, bioText, role }) {
 
 const CREATOR_7_BIO = `Agent00 is a co-founder of AMP and their men's care line, Tone. He is one of the most versatile creators in the space. Ranked #11 best streamer of 2024 by Complex, Agent has built a global audience through gaming, IRL travel streams across three continents, automotive content, including building a drift car live on stream. He's mastered content and has grown multiple YouTube channels beyond 1 million subscribers. He's partnered with the NFL, NBA, Popeyes, and became the first ever non-athlete to sign to Jordan Brand. He has a proven track record of driving immediate results and virality.`;
 
+const CREATOR_QT_BIO = `QTCinderella is a visionary content creator, host, and industry trailblazer recognized for her fearless approach to digital media. As a prominent Twitch streamer and YouTuber, she has redefined the boundaries of live entertainment through calculated creative risks and a relentless drive for innovation. Specializing in high-production-value hosting and conversational storytelling, QT has built a diverse portfolio spanning from competitive gaming to culinary arts to two successful podcasts (Wine About It and Fear&). One of the biggest female creators on Twitch, QT hosts the most popular events in streaming, including her flagship show, The Streamer Awards. The Streamer Awards is by far the biggest event of the year for the streaming community: last year it surpassed 1.2M concurrent viewers and accounted for a third of all viewership on Twitch. Beyond her individual content, she is a leading advocate for women in the streaming space. She remains dedicated to utilizing her platform to provide visibility for female creators and fostering a collaborative, elevated community across the industry.`;
+
+const CREATOR_TWO_FRIENDS_BIO = `From the back row of Mr. Castanares' middle school history class to sold-out nights at Madison Square Garden, lifelong companions Matt Halper and Eli Sones have turned Two Friends into a full-blown movement.\n\nKnown for their infectious songs like "Way It Was" with Quinn XCII, "If Only I" with Loud Luxury & Bebe Rexha, and their crossover country-dance smash "More Than Yesterday" with Russell Dickerson, the pair delivers feel-good anthems built for both massive stages and everyday playlists. And their viral remixes of The Killers' "Mr. Brightside", Blink-182's "I Miss You," and more continue to turn familiar favorites into dancefloor anthems.\n\nBut the story doesn't stop there. Their Big Bootie Mix series has become an award-winning cultural phenomenon, with each installment amassing millions of streams and serving as a generational soundtrack for pre-games, road trips and late nights. In 2022, that world expanded into Big Bootie Land, a citywide takeover that has brought the premiere of the new mixes to different cities each year, and now returns home to Chicago in 2026.\n\nOn stage, Matt and Eli are unmatched, whether headlining Red Rocks or The Forum, closing out the dance stages at the nation's biggest festivals such as Lollapalooza, Coachella, and Bonnaroo, or throwing down at their Vegas residencies at Wynn XS and Encore Beach Club and Miami residency at LIV.\n\nTwo Friends isn't just a name, it's a lifestyle. And as their community grows worldwide, one thing will always be true: no matter how far they go, they'll always just be Two Friends.`;
+
+const CREATOR_GABI_BIO = `Brazilian model and globally recognized content creator Gabi Moura has quickly emerged as one of fashion's most dynamic new faces. Following her runway debut at the Victoria's Secret Fashion Show, she has gone on to front campaigns including the Victoria's Secret PINK Spring Collection and OUTCAST's Spring Collection, with additional major projects on the horizon. Most recently, she is Sports Illustrated newest Rookie, further cementing her presence in the industry.\n\nBeyond modeling, Gabi has built a powerful digital footprint, amassing over 14 million followers across platforms. Known for seamlessly blending beauty, fashion, and digital culture, her authentic and engaging voice has led to partnerships with global brands such as YSL and L'Oréal. As a multi-hyphenate talent, Gabi represents the next generation of creators and is redefining what it means to be both a model and a modern cultural force.`;
+
 const CREATOR_DUKE_BIO = `Duke Dennis is a content creator and co-founder of AMP (Any Means Possible) and AMP's personal care brand, Tone. With over 20 million followers across all platforms and ranked the #5 most influential creator of 2024 by Rolling Stone, Duke's reach goes well beyond gaming. He has been featured in a Fortnite trailer, covered by GQ, and is the first ever non-athlete to be signed by Jordan Brand. Duke built his brand on authenticity, style, and a rare ability to move culture across every demographic.`;
 
 const CREATOR_8_BIO = `Xandra Pohl is one of the most exciting rising stars in both the creator and music scene today. In 2023, she was wrapping up her final year at the University of Miami when she decided to share her DJing talent on TikTok. What happened next was nothing short of extraordinary—her raw talent, electrifying energy, and unfiltered personality instantly resonated with Gen Z audiences, propelling her into the spotlight.\n\nAt just 24 years old, Xandra's journey has been nothing short of meteoric. In 2023 alone, she made waves performing at iconic events like the F1 Miami Grand Prix, opening for Kygo at the Pegasus World Cup, and sharing stages with music legends like Calvin Harris and The Chainsmokers at the Palm Tree Festival and 4th of July celebrations. In 2024, she was named a Sports Illustrated Rookie, released her first song, and became a part of Forbes 30 Under 30.\n\nBeyond music, Xandra's vibrant online presence and massive social following have caught the eye of top global brands. She's partnered with Celsius, Victoria Secret, YSL Beauty, Coach, L'Oréal Paris, and Bumble, blending her personal style with her love for all things fashion and beauty. Xandra's passion, talent, and authenticity continue to inspire and captivate audiences, making her a true force in the entertainment world.`;
@@ -224,7 +230,7 @@ export default function EventDetailPage() {
 
   const venueOverrides = {
     showcase: { name: "The Showcase Room @ Culinary Drop Out", address: "129 S Farmer Ave, Tempe, AZ, 85281", tz: "America/Phoenix" },
-    royce: { name: "Royce Hall", address: "10745 Dickson Ct, Los Angeles, CA, 90095", tz: "America/Los_Angeles" },
+    royce: { name: "Wilson Plaza at UCLA", address: "120 Westwood Plaza, Los Angeles, CA, 90095", tz: "America/Los_Angeles" },
     houston: { name: "Houston Room", address: "4100 University Dr, Houston, TX, 77004", tz: "America/Chicago" },
     uc: { name: "The UC Theatre", address: "2036 University Avenue, Berkeley, CA, 94704", tz: "America/Los_Angeles" },
     lakeside: { name: "Watsco Center", address: "1245 Dauer Drive, Coral Gables, FL, 33146", tz: "America/New_York" },
@@ -272,12 +278,22 @@ export default function EventDetailPage() {
             <div className="expect-block">
               <h3 className="expect-heading">What to expect</h3>
               <ul className="expect-list">
-                <li>Meet top creators</li>
-                <li>Create content live</li>
-                <li>Play + compete</li>
-                <li>Participate in a live conversation with creators</li>
-                {hasTag("uc") && <li>Live DJ performance</li>}
-                <li>Enjoy light bites and refreshments</li>
+                {hasTag("royce") ? (
+                  <>
+                    <li>Grab a photo with Josh & Gabi</li>
+                    <li>Create live content with QTCinderella</li>
+                    <li>Enjoy a live performance by Two Friends</li>
+                  </>
+                ) : (
+                  <>
+                    <li>Meet top creators</li>
+                    <li>Create content live</li>
+                    <li>Play + compete</li>
+                    <li>Participate in a live conversation with creators</li>
+                    {hasTag("uc") && <li>Live DJ performance</li>}
+                    <li>Enjoy light bites and refreshments</li>
+                  </>
+                )}
               </ul>
             </div>
           </section>
@@ -386,8 +402,47 @@ export default function EventDetailPage() {
             </section>
           )}
 
+          {/* Get to know Your Creator — royce events */}
+          {hasTag("royce") && (
+            <section className="event-section creator-section">
+              <h3 className="creator-heading">Get to Know Your Creators, Streamer & DJ</h3>
+              <div className="creator-card">
+                <img
+                  src="/josh-richards.png"
+                  alt="Josh Richards"
+                  className="creator-img"
+                />
+                <CreatorBio name="Josh Richards" role="Creator" />
+              </div>
+              <div className="creator-card" style={{ marginTop: 24 }}>
+                <img
+                  src="/gabi.jpg"
+                  alt="Gabi Moura"
+                  className="creator-img"
+                />
+                <CreatorBio name="Gabi Moura" bioText={CREATOR_GABI_BIO} role="Creator" />
+              </div>
+              <div className="creator-card" style={{ marginTop: 24 }}>
+                <img
+                  src="/qt.jpg"
+                  alt="QTCinderella"
+                  className="creator-img"
+                />
+                <CreatorBio name="QTCinderella" bioText={CREATOR_QT_BIO} role="Streamer" />
+              </div>
+              <div className="creator-card" style={{ marginTop: 24 }}>
+                <img
+                  src="/two_frieds.jpg"
+                  alt="Two Friends"
+                  className="creator-img"
+                />
+                <CreatorBio name="Two Friends" bioText={CREATOR_TWO_FRIENDS_BIO} role="DJ" />
+              </div>
+            </section>
+          )}
+
           {/* Performers — non-showcase events */}
-          {!hasTag("showcase") && !hasTag("houston") && !hasTag("lakeside") && !hasTag("uc") && event.performers && event.performers.length > 0 && (
+          {!hasTag("showcase") && !hasTag("houston") && !hasTag("lakeside") && !hasTag("uc") && !hasTag("royce") && event.performers && event.performers.length > 0 && (
             <section className="event-section">
               <h2>Lineup</h2>
               <div className="performers-list">
@@ -484,7 +539,7 @@ export default function EventDetailPage() {
         <div ref={checkoutRef} className="container checkout-section">
           <h2 className="checkout-heading">RSVP</h2>
           <div className="checkout-alert">
-            <strong>Note:</strong> There is a limit of one RSVP per person. You must use a valid <strong>.edu</strong> email address to register. <strong>Strict No Bags Policy.</strong> Limited Venue Capacity: Entry is first-come, first-served.
+            <strong>Note:</strong> There is a limit of one RSVP per person. You must use a valid <strong>.edu</strong> email address to register. Registration for the event is a prerequisite for entry but does not guarantee admission. Access to all event spaces and sessions is subject to venue capacity limits and will be granted on a first-come, first-served basis. The organizers reserve the right to deny entry once maximum occupancy is reached, regardless of registration status.
           </div>
           <div className="checkout-embed">
             <iframe

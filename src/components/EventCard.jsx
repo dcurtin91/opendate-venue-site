@@ -5,7 +5,7 @@ const SOLD_OUT_OVERRIDES = new Set(["688023"]);
 
 const VENUE_OVERRIDES = {
   showcase: { name: "The Showcase Room @ Culinary Drop Out", cityState: "Tempe, AZ", tz: "America/Phoenix" },
-  royce: { name: "Royce Hall", cityState: "Los Angeles, CA", tz: "America/Los_Angeles" },
+  royce: { name: "Wilson Plaza at UCLA", cityState: "Los Angeles, CA", tz: "America/Los_Angeles" },
   houston: { name: "Houston Room", cityState: "Houston, TX", tz: "America/Chicago" },
   uc: { name: "The UC Theatre", cityState: "Berkeley, CA", tz: "America/Los_Angeles" },
   lakeside: { name: "Watsco Center", cityState: "Coral Gables, FL", tz: "America/New_York" },
@@ -45,7 +45,7 @@ export default function EventCard({ event }) {
             <span className="event-card-image-day">{day}</span>
           </div>
         )}
-        {!isPast && !isShowcase && venueTag !== "houston" && venueTag !== "lakeside" && venueTag !== "uc" && <span className="coming-soon-overlay">COMING SOON</span>}
+        {!isPast && !isShowcase && venueTag !== "houston" && venueTag !== "lakeside" && venueTag !== "uc" && venueTag !== "royce" && <span className="coming-soon-overlay">COMING SOON</span>}
         {isPast && <span className="event-card-badge past">Past Event</span>}
         {!isPast && (event.sold_out || SOLD_OUT_OVERRIDES.has(String(event.id))) && <span className="event-card-badge sold-out">Sold Out</span>}
         {event.canceled_at && <span className="event-card-badge canceled">Canceled</span>}
