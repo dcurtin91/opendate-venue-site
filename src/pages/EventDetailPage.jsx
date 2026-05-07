@@ -284,7 +284,6 @@ export default function EventDetailPage() {
                   <>
                     <li>Enjoy a live performance by Two Friends</li>
                     <li>Grab a photo with Josh & Gabi</li>
-                    <li>Create live content with QTCinderella</li>
                     <li>Enjoy light bites and refreshments</li>
                   </>
                 ) : (
@@ -408,7 +407,7 @@ export default function EventDetailPage() {
           {/* Get to know Your Creator — royce events */}
           {hasTag("royce") && (
             <section className="event-section creator-section">
-              <h3 className="creator-heading">Get to Know Your DJ, Creators & Streamer</h3>
+              <h3 className="creator-heading">Get to Know Your DJ & Creators</h3>
               <div className="creator-card">
                 <img
                   src="/two_frieds.jpg"
@@ -432,14 +431,6 @@ export default function EventDetailPage() {
                   className="creator-img"
                 />
                 <CreatorBio name="Gabi Moura" bioText={CREATOR_GABI_BIO} role="Creator" />
-              </div>
-              <div className="creator-card" style={{ marginTop: 24 }}>
-                <img
-                  src="/qt.jpg"
-                  alt="QTCinderella"
-                  className="creator-img"
-                />
-                <CreatorBio name="QTCinderella" bioText={CREATOR_QT_BIO} role="Streamer" />
               </div>
             </section>
           )}
