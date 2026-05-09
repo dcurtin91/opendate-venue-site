@@ -28,7 +28,7 @@ export default function EventCard({ event }) {
   const isPast = event.start_time && new Date(event.start_time) < new Date();
   const presenterLine = venueTag === "uc"
     ? "With a Free Performance by DJ Xandra"
-    : venueTag === "royce" ? "With creators Josh Richards and Gabi Moura"
+    : venueTag === "royce" ? "With creators Josh Richards, Gabi Moura, and Tylil"
     : event.presenter ? `Presented by ${event.presenter}` : null;
 
   return (

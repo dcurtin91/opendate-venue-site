@@ -138,6 +138,8 @@ function CreatorBio({ name, bioText, role }) {
 
 const CREATOR_7_BIO = `Agent00 is a co-founder of AMP and their men's care line, Tone. He is one of the most versatile creators in the space. Ranked #11 best streamer of 2024 by Complex, Agent has built a global audience through gaming, IRL travel streams across three continents, automotive content, including building a drift car live on stream. He's mastered content and has grown multiple YouTube channels beyond 1 million subscribers. He's partnered with the NFL, NBA, Popeyes, and became the first ever non-athlete to sign to Jordan Brand. He has a proven track record of driving immediate results and virality.`;
 
+const CREATOR_TYLIL_BIO = `Tylil James, also known as "TheTylilshow" across social media, is one of the fastest growing and culturally relevant content creators today, and was recently ranked as the #3 most exciting up-and-coming streamer by Complex. Known for his genuine and infectious personality, hilarious banter, and trend-setting dances, Tylil has become a feature on Twitch, YouTube and TikTok. A frequent collaborator of Kai Cenat and AMP, Tylil's livestreams have featured appearances by some of the biggest names in music and entertainment, including SZA, Sexyy Red, Lil Uzi Vert, Snoop Dogg, Ice Spice, and more, all of whom have used Tylil's channels as a platform to promote their upcoming work. Tylil's trends, including his widlly popular dance, helmet game, and "Give my my money" clip, have generated over 5 billion impressions on TikTok alone in the past year, and has been copied by celebrities, musicians and even world-class athletes for touchdown dances.\n\nTylil's content is seen as the "new form of late night television" by his predominantly Gen Z audience, who gravitate towards Tylil's streams as a way to get to know their favorite artists and streamers in a more personal and authentic way. The NBA tapped Tylil to host the red carpet for their 2025 draft, leading to hilarious viral moments with their top stars like Cooper Flagg, VJ Edgecombe, and Dylan Harper. With an amazing and growing fanbase across TikTok, YouTube and Twitch, Tylil is poised to become the next big thing in streaming and content creation, and has used his massive platform to work with brands ranging from Nike, Adidas, DraftKings, Doordash, NBA 2K, EA, Footlocker, BET, and more.`;
+
 const CREATOR_QT_BIO = `QTCinderella is a visionary content creator, host, and industry trailblazer recognized for her fearless approach to digital media. As a prominent Twitch streamer and YouTuber, she has redefined the boundaries of live entertainment through calculated creative risks and a relentless drive for innovation. Specializing in high-production-value hosting and conversational storytelling, QT has built a diverse portfolio spanning from competitive gaming to culinary arts to two successful podcasts (Wine About It and Fear&). One of the biggest female creators on Twitch, QT hosts the most popular events in streaming, including her flagship show, The Streamer Awards. The Streamer Awards is by far the biggest event of the year for the streaming community: last year it surpassed 1.2M concurrent viewers and accounted for a third of all viewership on Twitch. Beyond her individual content, she is a leading advocate for women in the streaming space. She remains dedicated to utilizing her platform to provide visibility for female creators and fostering a collaborative, elevated community across the industry.`;
 
 const CREATOR_TWO_FRIENDS_BIO = `From the back row of Mr. Castanares' middle school history class to sold-out nights at Madison Square Garden, lifelong companions Matt Halper and Eli Sones have turned Two Friends into a full-blown movement.\n\nKnown for their infectious songs like "Way It Was" with Quinn XCII, "If Only I" with Loud Luxury & Bebe Rexha, and their crossover country-dance smash "More Than Yesterday" with Russell Dickerson, the pair delivers feel-good anthems built for both massive stages and everyday playlists. And their viral remixes of The Killers' "Mr. Brightside", Blink-182's "I Miss You," and more continue to turn familiar favorites into dancefloor anthems.\n\nBut the story doesn't stop there. Their Big Bootie Mix series has become an award-winning cultural phenomenon, with each installment amassing millions of streams and serving as a generational soundtrack for pre-games, road trips and late nights. In 2022, that world expanded into Big Bootie Land, a citywide takeover that has brought the premiere of the new mixes to different cities each year, and now returns home to Chicago in 2026.\n\nOn stage, Matt and Eli are unmatched, whether headlining Red Rocks or The Forum, closing out the dance stages at the nation's biggest festivals such as Lollapalooza, Coachella, and Bonnaroo, or throwing down at their Vegas residencies at Wynn XS and Encore Beach Club and Miami residency at LIV.\n\nTwo Friends isn't just a name, it's a lifestyle. And as their community grows worldwide, one thing will always be true: no matter how far they go, they'll always just be Two Friends.`;
@@ -256,7 +258,7 @@ export default function EventDetailPage() {
               {hasTag("uc")
                 ? <p className="event-presenter">With a Free Performance by DJ Xandra</p>
                 : hasTag("royce")
-                ? <p className="event-presenter">With creators Josh Richards and Gabi Moura</p>
+                ? <p className="event-presenter">With creators Josh Richards, Gabi Moura, and Tylil</p>
                 : event.presenter && <p className="event-presenter">Presented by {event.presenter}</p>}
             </div>
           </div>
@@ -283,7 +285,7 @@ export default function EventDetailPage() {
                 {hasTag("royce") ? (
                   <>
                     <li>Enjoy a live performance by Two Friends</li>
-                    <li>Grab a photo with Josh & Gabi</li>
+                    <li>Grab a photo with Josh, Gabi & Tylil</li>
                     <li>Enjoy light bites and refreshments</li>
                   </>
                 ) : (
@@ -431,6 +433,14 @@ export default function EventDetailPage() {
                   className="creator-img"
                 />
                 <CreatorBio name="Gabi Moura" bioText={CREATOR_GABI_BIO} role="Creator" />
+              </div>
+              <div className="creator-card" style={{ marginTop: 24 }}>
+                <img
+                  src="/tylil_headshot.png"
+                  alt="Tylil James"
+                  className="creator-img"
+                />
+                <CreatorBio name="Tylil" bioText={CREATOR_TYLIL_BIO} role="Creator" />
               </div>
             </section>
           )}
